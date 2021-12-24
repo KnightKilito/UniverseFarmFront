@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.MetaverseMaker.UniverseFarm.mapper.OrderInfoVOMapper" >
+    <select id="queryOrderInfoVO" resultType="com.MetaverseMaker.UniverseFarm.entity.OrderInfoVO">
+        select * from `v_orderinfo-userinfo`
+    </select>
+    <select id="queryKWOrderInfoVO" resultType="com.MetaverseMaker.UniverseFarm.entity.OrderInfoVO">
+        select * from `v_orderinfo-userinfo` where 1=1
+            and order_name LIKE CONCAT('%',#{kw},'%')
+            or order_time LIKE CONCAT('%',#{kw},'%')
+            or order_status LIKE CONCAT('%',#{kw},'%')
+            or order_number LIKE CONCAT('%',#{kw},'%')
+            or order_money LIKE CONCAT('%',#{kw},'%')
+            or user_name LIKE CONCAT('%',#{kw},'%')
+            or user_phone LIKE CONCAT('%',#{kw},'%')
+            or user_addressed LIKE CONCAT('%',#{kw},'%')
+    </select>
+    <select id="queryOrderIdOrderInfoVO" resultType="com.MetaverseMaker.UniverseFarm.entity.OrderInfoVO">
+        select * from `v_orderinfo-userinfo` where order_id=#{order_id}
+    </select>
+    <select id="queryUserIdOrderInfoVO" resultType="com.MetaverseMaker.UniverseFarm.entity.OrderInfoVO">
+        select * from `v_orderinfo-userinfo` where user_id=#{user_id}
+    </select>
+</mapper>
