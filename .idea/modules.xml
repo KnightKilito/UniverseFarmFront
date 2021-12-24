@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/UniverseFramFront.iml" filepath="$PROJECT_DIR$/UniverseFramFront.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UniverseFarmFront.iml" filepath="$PROJECT_DIR$/UniverseFarmFront.iml" />
     </modules>
   </component>
 </project>
