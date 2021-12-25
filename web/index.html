@@ -26,6 +26,37 @@
  <script src="js/common_js.js" type="text/javascript"></script>
  <script src="js/footer.js" type="text/javascript"></script>
 <link rel="stylesheet" href="static/css/organik.css" />
+<!-- <meta http-equiv="refresh" content="3">-->
+<!-- <script>-->
+<!--  //全局变量-->
+<!--  // var globalpage=1;-->
+<!--  // var globalsize=4;-->
+<!--  // var globalpageCount=0;-->
+
+
+
+<!--  //加载首页的数据-->
+<!--  $(document).ready(function(){-->
+<!--   mypage();-->
+<!--  });-->
+<!-- </script>-->
+<!-- <script>-->
+<!--  /**-->
+<!--   * 分页函数-->
+<!--   * @param page   当前页数-->
+<!--   * @param size   每页显示条数-->
+<!--   */-->
+
+<!-- </script>-->
+<!-- <script>-->
+<!--  function myjump(){-->
+<!--   //获取输入框的内容-->
+<!--   var index=  $("#goindex").val();-->
+<!--   mypage(index,4);-->
+
+<!--  }-->
+
+<!-- </script>-->
  <script>
 
 
@@ -51,48 +82,107 @@
      }
     }
    });
-   // //加载饮料导航栏
-   // $(document).ready(function(){
-   //  myshow("饮料",8,"list_more_drinks");
-   // });
-   //
-   // //加载评分前四的饮料
-   // $(document).ready(function(){
-   //  mygetDataByTypeAndLimit("饮料",4,"lists_drinks");
-   // });
-   //
-   // //加载零食导航栏
-   // $(document).ready(function(){
-   //  myshow("零食",8,"list_more_foods");
-   // });
-   //
-   // //加载评分前四的零食
-   // $(document).ready(function(){
-   //  mygetDataByTypeAndLimit("零食",4,"lists_foods");
-   // });
-   //
-   // //加载生鲜导航栏
-   // $(document).ready(function(){
-   //  myshow("生鲜",8,"list_more_vegetable");
-   // });
-   //
-   // //加载评分前四的蔬菜生鲜
-   // $(document).ready(function(){
-   //  mygetDataByTypeAndLimit("生鲜",4,"lists_vegetable");
-   // });
-   //
-   // //加载调料导航栏
-   // $(document).ready(function(){
-   //  myshow("调味",8,"list_more_condiment");
-   // });
-   // //加载评分前四的柴米油盐酱醋茶
-   // $(document).ready(function(){
-   //  mygetDataByTypeAndLimit("调味",4,"lists_condiment");
-   // });
+
+   $(document).ready(function(){
+    $.ajax({
+     url: "http://localhost:8088/UinverseFarmBack/getSoil.do",
+     dataType:"json",
+     type:"get",
+     xhrFields: {
+      withCredentials: true
+     },
+     crossDomain: true,
+     success:function(result){
+      // globalpage=result.data.page;
+      // globalsize=result.data.size;
+      // globalpageCount=result.data.pageCount;
+      if(result.flag==0){
+       //没有数据
+       $("#soillist").html("暂无数据");
+      }else{
+       //取出数据
+       var mydata= result.data;
+       var str="";
+       var i;
+       for(i=0;i<mydata.length;i++){
+        str=str+ '<div className="col-lg-4 col-md-6 filter-item fruits">'+
+                '<div className="product-card__two">'+
+                '<div className="product-card__two-image">'+
+                ' <span className="product-card__two-sale">sale</span>'+
+                '<img src="static/picture/苹果果.png" alt="">'+
+                '<div className="product-card__two-image-content">'+
+                '<a href="#"><i className="organik-icon-visibility"></i></a>'+
+                '<a href="#"><i className="organik-icon-heart"></i></a>'+
+                '<a href="car.html"><i className="organik-icon-shopping-cart"></i></a>'+
+                '</div>'+
+                '</div>'+
+                '<div className="product-card__two-content">'+
+                '<h3><a href="product-details.html">'+mydata[i].soilName+'</a></h3>'+
+                '<div className="product-card__two-stars">'+
+                '<i className="fa fa-star"></i>'+
+                '<i className="fa fa-star"></i>'+
+                '<i className="fa fa-star"></i>'+
+                '<i className="fa fa-star"></i>'+
+                '<i className="fa fa-star"></i>'+
+                '</div>'+
+                '<p>￥'+mydaya[i].soilPrice+'</p>'+
+                '</div>'+
+                '</div>'+
+                '</div>';
+        // str=str+'<li class="gl-item"> <em class="icon_special tejia"></em> <div class="Borders">'+
+        //         '<div class="img"><a href="goodsinfo.html?goods_id='+mydata[i].goods_id+'"><img src="products/p_1.jpg" style="width:220px;height:220px">'+
+        //         '</a></div> <div class="Price"><b>¥'+mydata[i].goods_price+'</b>';
+
+        // if(mydata[i].goods_type=="生鲜")	{
+        //  str=str+'<span>[¥'+mydata[i].goods_price+'/500g]</span>';
+        // }else{
+        //  str=str+'<span>[¥'+mydata[i].goods_price+'/件]</span>';
+        // }
+        // str=str+'</div><div class="name"><a href="goodsinfo.html?goods_id='+mydata[i].goods_id+'">'+mydata[i].goods_name+'</a></div>'+
+        //         '<div class="Shop_name"><a href="#">'+mydata[i].goods_company+'</a></div>'+
+        //         ' <div class="p-operate"> <a href="#" class="p-o-btn Collect"><em></em>收藏</a>'+
+        //         '<a href="#" class="p-o-btn shop_cart"><em></em>联系我们</a> </div> </div> </li>';
+       }
+       $("soillist").html(str);
 
 
+       // var str2='<a href="javascript:mypage(1,'+globalsize+')">首页</a>';
+       // var str3= '<a href="javascript:mypage('+(globalpage-1)+','+globalsize+')">&lt;上一页</a>';
+       // var strpage="";
+       // for(i=1;i<=globalpageCount;i++){
+       //  if(i==globalpage){
+       //   strpage=strpage+'<a href="javascript:mypage('+i+','+globalsize+')" class="on">'+i+'</a>';
+       //  }else{
+       //   strpage=strpage+'<a href="javascript:mypage('+i+','+globalsize+')" >'+i+'</a>';
+       //  }
+       //
+       // }
 
+//						  <a href="#" class="on">1</a>
+//						  <a href="#">2</a>
+//						  <a href="#">3</a>
+//						  <a href="#">4</a>
+//       var str4='<a href="javascript:mypage('+(globalpage+1)+','+globalsize+')">下一页&gt;</a>';
+//       var str5='<a href="javascript:mypage('+globalpageCount+','+globalsize+')">尾页</a>';
+//
+//       $("#mypagetool").html(str2+str3+strpage+str4+str5);
+//
+//
+//       var selectstr="";
+//       for(i=1;i<=globalpageCount;i++){
+//        if(i==globalpage){
+//         selectstr=selectstr+"<option selected='selected' value='"+i+"'>"+i+"</option>"
+//        }else{
+//         selectstr=selectstr+"<option value='"+i+"'>"+i+"</option>"
+//        }
+//       }
+//       $("#myselect").html(selectstr);
+      }
+     },
 
+    });
+
+   })
   });
 
 
@@ -116,10 +206,16 @@
 
 
   }
-
-
-
  </script>
+<!-- <script>-->
+<!--  function myjump(){-->
+<!--   //获取输入框的内容-->
+<!--   // var index=  $("#goindex").val();-->
+<!--   mypage();-->
+
+<!--  }-->
+
+<!-- </script>-->
 </head>
 <body>
 <div class="preloader">
@@ -194,7 +290,7 @@
 <ul>
 <li><a href="products.html">Shop</a></li>
 <li><a href="product-details.html">Product Details</a></li>
-<li><a href="cart.html">Cart Page</a></li>
+<li><a href="car.html">Cart Page</a></li>
 <li><a href="checkout.html">Checkout</a></li>
 </ul>
 </li>
@@ -355,55 +451,57 @@ Food Market</h2>
 </li>
 </ul>
 </div>
-<div class="row filter-layout">
-<div class="col-lg-4 col-md-6 filter-item fruits">
-<div class="product-card__two">
-<div class="product-card__two-image">
-<span class="product-card__two-sale">sale</span>
-<img src="static/picture/苹果果.png" alt="">
-<div class="product-card__two-image-content">
-<a href="#"><i class="organik-icon-visibility"></i></a>
-<a href="#"><i class="organik-icon-heart"></i></a>
-<a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
-</div>
-</div>
-<div class="product-card__two-content">
-<h3><a href="product-details.html">苹果</a></h3>
-<div class="product-card__two-stars">
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
- </div>
-<p>￥1.00</p>
-</div>
-</div>
-</div>
+<div class="row filter-layout" id="soillist">
 
-<div class="col-lg-4 col-md-6 filter-item fruits">
-<div class="product-card__two">
-<div class="product-card__two-image">
-<img src="static/picture/柚子果.png" alt="" height="236">
-<div class="product-card__two-image-content">
-<a href="#"><i class="organik-icon-visibility"></i></a>
-<a href="#"><i class="organik-icon-heart"></i></a>
-<a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
-</div>
-</div>
-<div class="product-card__two-content">
-<h3><a href="product-details.html">橙子</a></h3>
-<div class="product-card__two-stars">
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-<i class="fa fa-star"></i>
-</div>
-<p>￥3.00</p>
-</div>
-</div>
-</div>
+<!--<div class="col-lg-4 col-md-6 filter-item fruits">-->
+<!--<div class="product-card__two">-->
+<!--<div class="product-card__two-image">-->
+<!--<span class="product-card__two-sale">sale</span>-->
+<!--<img src="static/picture/苹果果.png" alt="">-->
+<!--<div class="product-card__two-image-content">-->
+<!--<a href="#"><i class="organik-icon-visibility"></i></a>-->
+<!--<a href="#"><i class="organik-icon-heart"></i></a>-->
+<!--<a href="car.html"><i class="organik-icon-shopping-cart"></i></a>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="product-card__two-content">-->
+<!--<h3><a href="product-details.html">苹果</a></h3>-->
+<!--<div class="product-card__two-stars">-->
+<!--<i class="fa fa-star"></i>-->
+<!--<i class="fa fa-star"></i>-->
+<!--<i class="fa fa-star"></i>-->
+<!--<i class="fa fa-star"></i>-->
+<!--<i class="fa fa-star"></i>-->
+<!-- </div>-->
+<!--<p>￥1.00</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div class="col-lg-4 col-md-6 filter-item fruits">-->
+<!--<div class="product-card__two">-->
+<!--<div class="product-card__two-image">-->
+<!--<img src="static/picture/柚子果.png" alt="" height="236">-->
+<!--<div class="product-card__two-image-content">-->
+<!--<a href="#"><i class="organik-icon-visibility"></i></a>-->
+<!--<a href="#"><i class="organik-icon-heart"></i></a>-->
+<!--<a href="car.html"><i class="organik-icon-shopping-cart"></i></a>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="product-card__two-content">-->
+<!--<h3><a href="product-details.html">橙子</a></h3>-->
+<!--<div class="product-card__two-stars">-->
+<!--<i class="fa fa-star"></i>-->
+<!--<i class="fa fa-star"></i>-->
+<!--<i class="fa fa-star"></i>-->
+<!--<i class="fa fa-star"></i>-->
+<!--<i class="fa fa-star"></i>-->
+<!--</div>-->
+<!--<p>￥3.00</p>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
 <div class="col-lg-4 col-md-6 filter-item pantry">
 <div class="product-card__two">
 <div class="product-card__two-image">
@@ -411,7 +509,7 @@ Food Market</h2>
 <div class="product-card__two-image-content">
 <a href="#"><i class="organik-icon-visibility"></i></a>
 <a href="#"><i class="organik-icon-heart"></i></a>
-<a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
+<a href="car.html"><i class="organik-icon-shopping-cart"></i></a>
 </div>
 </div>
 <div class="product-card__two-content">
@@ -435,7 +533,7 @@ Food Market</h2>
     <div class="product-card__two-image-content">
      <a href="#"><i class="organik-icon-visibility"></i></a>
      <a href="#"><i class="organik-icon-heart"></i></a>
-     <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
+     <a href="car.html"><i class="organik-icon-shopping-cart"></i></a>
     </div>
    </div>
    <div class="product-card__two-content">
@@ -458,7 +556,7 @@ Food Market</h2>
     <div class="product-card__two-image-content">
      <a href="#"><i class="organik-icon-visibility"></i></a>
      <a href="#"><i class="organik-icon-heart"></i></a>
-     <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
+     <a href="car.html"><i class="organik-icon-shopping-cart"></i></a>
     </div>
    </div>
    <div class="product-card__two-content">
@@ -483,7 +581,7 @@ Food Market</h2>
     <div class="product-card__two-image-content">
      <a href="#"><i class="organik-icon-visibility"></i></a>
      <a href="#"><i class="organik-icon-heart"></i></a>
-     <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
+     <a href="car.html"><i class="organik-icon-shopping-cart"></i></a>
     </div>
    </div>
    <div class="product-card__two-content">
@@ -507,7 +605,7 @@ Food Market</h2>
     <div class="product-card__two-image-content">
      <a href="#"><i class="organik-icon-visibility"></i></a>
      <a href="#"><i class="organik-icon-heart"></i></a>
-     <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
+     <a href="car.html"><i class="organik-icon-shopping-cart"></i></a>
     </div>
    </div>
    <div class="product-card__two-content">
@@ -531,7 +629,7 @@ Food Market</h2>
     <div class="product-card__two-image-content">
      <a href="#"><i class="organik-icon-visibility"></i></a>
      <a href="#"><i class="organik-icon-heart"></i></a>
-     <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
+     <a href="car.html"><i class="organik-icon-shopping-cart"></i></a>
     </div>
    </div>
    <div class="product-card__two-content">
@@ -555,7 +653,7 @@ Food Market</h2>
 <div class="product-card__two-image-content">
 <a href="#"><i class="organik-icon-visibility"></i></a>
 <a href="#"><i class="organik-icon-heart"></i></a>
-<a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
+<a href="car.html"><i class="organik-icon-shopping-cart"></i></a>
 </div>
 </div>
 <div class="product-card__two-content">

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Blog Page</title>
+<title>Cart Page</title>
 
 <link rel="preconnect" href="https://fonts.gstatic.com" />
 <link href="static/css/fc1ab68d70ad48e88943ce422f4566dc.css" rel="stylesheet" />
@@ -21,6 +21,54 @@
 <link rel="stylesheet" href="static/css/tiny-slider.min.css" />
 
 <link rel="stylesheet" href="static/css/organik.css" />
+  <script>
+   $(document).ready(function(){
+   //获取用户输入的登录名字和密码
+   // var myname= $("#myname").val();
+   // var mypwd=$("#mypwd").val();
+
+   $.ajax({
+   url: "http://localhost:8088/UniverseFarmBack/findCart.do",
+   dataType:"json",
+   type:"get",
+   xhrFields: {                               //保存session在跨域访问中不会丢失！！！
+   withCredentials: true
+  },
+   crossDomain: true,
+   success:function(result){
+    var data=result.carList;
+    var i=0;
+    var str="";
+    for(i;i<data.length;i++)
+    {
+     str=str+'<tr>'+
+             '<td>'+
+             '<div className="product-box">'+
+             '<img src="static/picture/cart-1-1.jpg" alt="">'+
+             ' <h3><a href="product-details.html">'+data.name+'</a></h3>'+
+             '</div>'+
+             '</td>'+
+             '<td>'+$+data.totalMoney+'</td>'+
+             '<td>'+
+             '<div className="quantity-box">'+
+             '<button type="button" className="sub">-</button>'+
+             '<input type="number" id="2" value="1"/>'+
+             '<button type="button" className="add">+</button>'+
+             '</div>'+
+             '</td>'+
+             '<td>'+
+             ' '+data.photo+
+             '</td>'+
+             '<td>'+
+             '<i className="organik-icon-close remove-icon"></i>'+
+             '</td>'+
+             '</tr>'
+    }
+  }
+  });
+
+  })
+ </script>
 </head>
 <body>
 <div class="preloader">
@@ -32,8 +80,8 @@
 <div class="topbar">
 <div class="container">
 <div class="main-logo">
-<a href="index.html" class="logo">
-<img src="static/picture/logo-dark.png" width="105" alt="">
+<a href="personal.html" class="logo">
+<img src="static/picture/universe.PNG" width="300" alt="">
 </a>
 <div class="mobile-nav__buttons">
 <a href="#" class="search-toggler"><i class="organik-icon-magnifying-glass"></i></a>
@@ -49,7 +97,7 @@
 </div>
 <div class="topbar__info">
 <i class="organik-icon-email"></i>
-<p>Email <a href="/cdn-cgi/l/email-protection#bcd5d2dad3fcd3cedbddd2d5d792dfd3d1"><span class="__cf_email__" data-cfemail="bad3d4dcd5fad5c8dddbd4d3d194d9d5d7">[email&#160;protected]</span></a></p>
+<p>Email <a href="/cdn-cgi/l/email-protection#b8d1d6ded7f8d7cadfd9d6d1d396dbd7d5"><span class="__cf_email__" data-cfemail="50393e363f103f2237313e393b7e333f3d">[email&#160;protected]</span></a></p>
 </div>
 </div>
 <div class="topbar__right">
@@ -67,54 +115,59 @@
 <nav class="main-menu">
 <div class="container">
 <div class="main-menu__login">
-<a href="#"><i class="organik-icon-user"></i>Login / Register</a>
 </div>
-<ul class="main-menu__list">
-<li class="dropdown">
-<a href="index.html">Home</a>
-<ul>
-<li>
-<a href="index.html">Home One</a>
-</li>
-<li><a href="index-2.html">Home Two</a></li>
-<li class="dropdown">
-<a href="#">Header Styles</a>
-<ul>
-<li><a href="index.html">Header One</a></li>
-<li><a href="index-2.html">Header Two</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<a href="about.html">About</a>
-</li>
-<li class="dropdown">
-<a href="products.html">Shop</a>
-<ul>
-<li><a href="products.html">Shop</a></li>
-<li><a href="product-details.html">Product Details</a></li>
-<li><a href="car.html">Cart Page</a></li>
-<li><a href="checkout.html">Checkout</a></li>
-</ul>
-</li>
-<li class="dropdown"><a href="news.html">News</a>
-<ul>
-<li><a href="news.html">News</a></li>
-<li><a href="news-details.html">News Details</a></li>
-</ul>
-</li>
-<li><a href="contact.html">Contact</a></li>
-</ul>
-<div class="main-menu__language">
-<img src="static/picture/flag-1-1.jpg" alt="">
-<label class="sr-only" for="language-select">select language</label>
+ <ul class="main-menu__list">
+  <li class="dropdown">
+   <a href="personal.html">个人中心</a>
+   <ul>
+    <li>
+     <a href="personal.html">个人信息修改</a></li>
+    <li><a href="index-2.html">发布自己的元产品</a></li>
+    <li><a href="index-2.html">显示个人信息</a></li>
+    <li><a href="index-2.html">交易记录</a></li>
+    <li><a href="index-2.html">个人产品</a></li>
+    <!--<li class="dropdown">
+    <a href="#">个人模板</a>
+    <ul>
+    <li><a href="personal.html">个人信息修改</a></li>
+    <li><a href="index-2.html">发布自己的元产品</a></li>
+     <li><a href="index-2.html">显示个人信息</a></li>
+     <li><a href="index-2.html">交易记录</a></li>
+     <li><a href="index-2.html">个人产品</a></li>
+    </ul>--!>
+    </li>
+   </ul>
+  </li>
+  <!--<li>
+  <a href="about.html">About</a>
+  </li>-->
+  <li class="dropdown">
+   <a href="products.html">交易市场</a>
+   <ul>
+    <li><a href="products.html">Shop</a></li>
+    <li><a href="product-details.html">Product Details</a></li>
+    <li><a href="car.html">Cart Page</a></li>
+    <li><a href="checkout.html">Checkout</a></li>
+   </ul>
+  </li>
+  <li class="dropdown"><a href="news.html">购物车</a>
+   <ul>
+    <li><a href="news.html">购物车</a></li>
+    <li><a href="news-details.html">News Details</a></li>
+   </ul>
+  </li>
+  <li><a href="contact.html">个人农场</a></li>
+  <li><a href="contact.html">农场社区</a></li>
+ </ul>
+ <div class="main-menu__language">
+  <img src="static/picture/flag.jpg" alt="" width="50">
+  <label class="sr-only" for="language-select">选择语言</label>
 
-<select class="selectpicker" id="language-select-header">
-<option value="english">English</option>
-<option value="arabic">Arabic</option>
-</select>
-</div>
+  <select class="selectpicker" id="language-select-header">
+   <option value="english">中文</option>
+   <option value="arabic">英文</option>
+  </select>
+ </div>
 </div>
 </nav>
 
@@ -126,129 +179,105 @@
 <div class="page-header__bg" style="background-image: url(static/images/page-header-bg-1-1.jpg);"></div>
 
 <div class="container">
-<h2>Blog</h2>
+<h2>购物车</h2>
 <ul class="thm-breadcrumb list-unstyled">
-<li><a href="index.html">Home</a></li>
+<li><a href="personal.html">首页</a></li>
 <li>/</li>
-<li><span>Blog</span></li>
+<li><span>购物车</span></li>
 </ul>
 </div>
 </section>
-<div class="blog-page">
+<section class="cart-page">
 <div class="container">
+<div class="table-responsive">
+<table class="table cart-table">
+<thead>
+<tr>
+<th>商品</th>
+<th>价格</th>
+<th>数量</th>
+<th>总价</th>
+<th>删除</th>
+</tr>
+</thead>
+<!--<tbody>-->
+<!--<tr>-->
+<!--<td>-->
+<!--<div class="product-box">-->
+<!--<img src="static/picture/cart-1-1.jpg" alt="">-->
+<!--<h3><a href="product-details.html">Banana</a></h3>-->
+<!--</div>-->
+<!--</td>-->
+<!--<td>$9.99</td>-->
+<!--<td>-->
+<!--<div class="quantity-box">-->
+<!--<button type="button" class="sub">-</button>-->
+<!--<input type="number" id="2" value="1" />-->
+<!--<button type="button" class="add">+</button>-->
+<!--</div>-->
+<!--</td>-->
+<!--<td>-->
+<!--$9.99-->
+<!--</td>-->
+<!--<td>-->
+<!--<i class="organik-icon-close remove-icon"></i>-->
+<!--</td>-->
+<!--</tr>-->
+<!--<tr>-->
+<!--<td>-->
+<!--<div class="product-box">-->
+<!--<img src="static/picture/cart-1-2.jpg" alt="">-->
+<!--<h3><a href="product-details.html">Tomatoes</a></h3>-->
+<!--</div>-->
+<!--</td>-->
+<!--<td>$9.99</td>-->
+<!--<td>-->
+<!--<div class="quantity-box">-->
+<!--<button type="button" class="sub">-</button>-->
+<!--<input type="number" id="2" value="1" />-->
+<!--<button type="button" class="add">+</button>-->
+<!--</div>-->
+<!--</td>-->
+<!--<td>-->
+<!--$9.99-->
+<!--</td>-->
+<!--<td>-->
+<!--<i class="organik-icon-close"></i>-->
+<!--</td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
+</div>
 <div class="row">
-<div class="col-sm-12 col-md-6 col-lg-4">
-<div class="blog-card">
-<div class="blog-card__image">
-<div class="blog-card__date">18 Nov</div>
-<img src="static/picture/blog-1-1.png" alt="How to Findout Healthy Food For Body">
-<a href="news-details.html"></a>
+<div class="col-lg-8">
+<form action="#" class="contact-one__form">
+<input type="text" placeholder="优惠码">
+<button type="submit" class="thm-btn">申请</button>
+</form>
 </div>
-<div class="blog-card__content">
-<div class="blog-card__meta">
-<a href="news-details.html"><i class="far fa-user-circle"></i> by Admin</a>
-<a href="news-details.html"><i class="far fa-comments"></i> 2 Comments</a>
-</div>
-<h3><a href="news-details.html">How to Findout Healthy Food For Body</a></h3>
-<p>Lorem ipsum is simply free text used by copytyping refreshing.</p>
-</div>
-</div>
-</div>
-<div class="col-sm-12 col-md-6 col-lg-4">
-<div class="blog-card">
-<div class="blog-card__image">
-<div class="blog-card__date">18 Nov</div>
-<img src="static/picture/blog-1-2.png" alt="Leverage agile frameworks to provide">
-<a href="news-details.html"></a>
-</div>
-<div class="blog-card__content">
-<div class="blog-card__meta">
-<a href="news-details.html"><i class="far fa-user-circle"></i> by Admin</a>
-<a href="news-details.html"><i class="far fa-comments"></i> 2 Comments</a>
-</div>
-<h3><a href="news-details.html">Leverage agile frameworks to provide</a></h3>
-<p>Lorem ipsum is simply free text used by copytyping refreshing.</p>
-</div>
-</div>
-</div>
-<div class="col-sm-12 col-md-6 col-lg-4">
-<div class="blog-card">
-<div class="blog-card__image">
-<div class="blog-card__date">18 Nov</div>
-<img src="static/picture/blog-1-3.png" alt="Organically grow the holistic world view">
-<a href="news-details.html"></a>
-</div>
-<div class="blog-card__content">
-<div class="blog-card__meta">
-<a href="news-details.html"><i class="far fa-user-circle"></i> by Admin</a>
-<a href="news-details.html"><i class="far fa-comments"></i> 2 Comments</a>
-</div>
-<h3><a href="news-details.html">Organically grow the holistic world view</a></h3>
-<p>Lorem ipsum is simply free text used by copytyping refreshing.</p>
-</div>
-</div>
-</div>
-<div class="col-sm-12 col-md-6 col-lg-4">
-<div class="blog-card">
-<div class="blog-card__image">
-<div class="blog-card__date">18 Nov</div>
-<img src="static/picture/blog-1-4.png" alt="Bring to the table win-win survival">
-<a href="news-details.html"></a>
-</div>
-<div class="blog-card__content">
-<div class="blog-card__meta">
-<a href="news-details.html"><i class="far fa-user-circle"></i> by Admin</a>
-<a href="news-details.html"><i class="far fa-comments"></i> 2 Comments</a>
-</div>
-<h3><a href="news-details.html">Bring to the table win-win survival</a></h3>
-<p>Lorem ipsum is simply free text used by copytyping refreshing.</p>
-</div>
-</div>
-</div>
-<div class="col-sm-12 col-md-6 col-lg-4">
-<div class="blog-card">
-<div class="blog-card__image">
-<div class="blog-card__date">18 Nov</div>
-<img src="static/picture/blog-1-5.png" alt="At the end of the day, going forward">
-<a href="news-details.html"></a>
-</div>
-<div class="blog-card__content">
-<div class="blog-card__meta">
-<a href="news-details.html"><i class="far fa-user-circle"></i> by Admin</a>
-<a href="news-details.html"><i class="far fa-comments"></i> 2 Comments</a>
-</div>
-<h3><a href="news-details.html">At the end of the day, going forward</a></h3>
-<p>Lorem ipsum is simply free text used by copytyping refreshing.</p>
-</div>
-</div>
-</div>
-<div class="col-sm-12 col-md-6 col-lg-4">
-<div class="blog-card">
-<div class="blog-card__image">
-<div class="blog-card__date">18 Nov</div>
-<img src="static/picture/blog-1-6.png" alt="User generated content in real-time">
-<a href="news-details.html"></a>
-</div>
-<div class="blog-card__content">
-<div class="blog-card__meta">
-<a href="news-details.html"><i class="far fa-user-circle"></i> by Admin</a>
-<a href="news-details.html"><i class="far fa-comments"></i> 2 Comments</a>
-</div>
-<h3><a href="news-details.html">User generated content in real-time</a></h3>
-<p>Lorem ipsum is simply free text used by copytyping refreshing.</p>
-</div>
-</div>
-</div>
-</div>
-<ul class="list-unstyled post-pagination d-flex justify-content-center">
-<li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-<li><a href="#">1</a></li>
-<li><a href="#">2</a></li>
-<li><a href="#">3</a></li>
-<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+<div class="col-lg-4">
+<ul class="cart-total list-unstyled">
+<li>
+<span>总价</span>
+<span>$19.98 USD</span>
+</li>
+<li>
+<span>商品折扣</span>
+<span>$0.00 USD</span>
+</li>
+<li>
+<span>支付</span>
+<span>$19.98 USD</span>
+</li>
 </ul>
+<div class="button-box">
+<a href="#" class="thm-btn">更新</a>
+<a href="#" class="thm-btn">支付</a>
 </div>
 </div>
+</div>
+</div>
+</section>
 <footer class="site-footer background-black-2">
 <img src="static/picture/footer-bg-1-1.png" alt="" class="site-footer__shape-1">
 <img src="static/picture/footer-bg-1-2.png" alt="" class="site-footer__shape-2">
@@ -256,8 +285,8 @@
 <div class="row">
 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
 <div class="footer-widget footer-widget__about-widget">
-<a href="index.html" class="footer-widget__logo">
-<img src="static/picture/logo-light.png" alt="" width="105" height="43">
+<a href="personal.html" class="footer-widget__logo">
+<img src="static/picture/universe.PNG" alt="" width="200" height="43">
 </a>
 <p class="thm-text-dark">Atiam rhoncus sit amet adip
 scing sed ipsum. Lorem ipsum
@@ -275,7 +304,7 @@ sem neque.</p>
 </li>
 <li>
 <i class="fa fa-envelope"></i>
-<a href="/cdn-cgi/l/email-protection#563f3830391635393b2637382f7835393b"><span class="__cf_email__" data-cfemail="9df4f3fbf2ddfef2f0edfcf3e4b3fef2f0">[email&#160;protected]</span></a>
+<a href="/cdn-cgi/l/email-protection#a0c9cec6cfe0c3cfcdd0c1ced98ec3cfcd"><span class="__cf_email__" data-cfemail="ddb4b3bbb29dbeb2b0adbcb3a4f3beb2b0">[email&#160;protected]</span></a>
 </li>
 <li>
 <i class="fa fa-map-marker-alt"></i>
@@ -290,18 +319,18 @@ New York</a>
 <h3 class="footer-widget__title">Links</h3>
 <ul class="list-unstyled footer-widget__links">
 <li>
-<a href="index.html">Top Sellers</a>
+<a href="personal.html">Top Sellers</a>
 </li>
 <li>
 <a href="products.html">Shopping</a>
 </li>
 <li>
 <a href="about.html">About Store</a>
-</li>
+ </li>
 <li>
 <a href="contact.html">Contact</a>
 </li>
- <li>
+<li>
 <a href="contact.html">Help</a>
 </li>
 </ul>
@@ -359,7 +388,7 @@ New York</a>
 <div class="mobile-nav__content">
 <span class="mobile-nav__close mobile-nav__toggler"><i class="organik-icon-close"></i></span>
 <div class="logo-box">
-<a href="index.html" aria-label="logo image"><img src="static/picture/logo-light.png" width="155" alt="" /></a>
+<a href="personal.html" aria-label="logo image"><img src="static/picture/logo-light.png" width="155" alt="" /></a>
 </div>
 
 <div class="mobile-nav__container"></div>
@@ -367,11 +396,11 @@ New York</a>
 <ul class="mobile-nav__contact list-unstyled">
 <li>
 <i class="organik-icon-email"></i>
-<a href="/cdn-cgi/l/email-protection#f09e95959498959c80b09f8297919e999bde939f9d"><span class="__cf_email__" data-cfemail="0a646f6f6e626f667a4a65786d6b64636124696567">[email&#160;protected]</span></a>
+ <a href="/cdn-cgi/l/email-protection#7e101b1b1a161b120e3e110c191f101715501d1113"><span class="__cf_email__" data-cfemail="741a1111101c111804341b0613151a1d1f5a171b19">[email&#160;protected]</span></a>
 </li>
 <li>
 <i class="organik-icon-calling"></i>
- <a href="tel:666-888-0000">666 888 0000</a>
+<a href="tel:666-888-0000">666 888 0000</a>
 </li>
 </ul>
 <div class="mobile-nav__top">
