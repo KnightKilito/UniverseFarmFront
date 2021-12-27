@@ -175,6 +175,42 @@
 
             });
         }
+        //更新头像
+        function updateavatar(){
+            var formData = new FormData();
+            console.log(formData);
+            formData.append("file",$("#prev")[0].files[0]);
+            //formData.append("name",name);
+            $.ajax({
+                url : "http://localhost:8088/shopback/uploadUserAvatar.do",
+                type : 'POST',
+                data : formData,
+                // 告诉jQuery不要去处理发送的数据
+                processData : false,
+                // 告诉jQuery不要去设置Content-Type请求头
+                contentType : false,
+                xhrFields: {                               //保存session在跨域访问中不会丢失！！！
+                    withCredentials: true
+                },
+                crossDomain: true,
+                beforeSend:function(){
+                    console.log("正在进行，请稍候");
+                },
+                success : function(result) {
+                    if(result.flag==0){
+                        alert("头像上传异常，请稍后再试");
+                    }else{
+                        alert("头像上传成功！");
+                        //设置头像
+                        $("#userlogo2").html('<img src="http://localhost:8088/UniverseFarmBack/upload/'+result.data+'"  width="90" height="90">  <div class="background_img"></div>');
+
+                    }
+                },
+                error : function(result) {
+                    console.log("error");
+                }
+            });
+        }
     </script>
 </head>
 <body>
@@ -368,7 +404,7 @@
                             <span>Update Avatar</span>
                         </div>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button type="submit" onclick="updateavatar()" class="thm-btn" href="#mymodal" data-toggle='modal' >Upload</button>
+                            <button type="submit"  class="thm-btn" href="#mymodal" data-toggle='modal' >Upload</button>
                         </form>
                     </div>
                 </div>
@@ -381,7 +417,8 @@
 
         <div class="modal-dialog" style="width: 800px">
             <div class="modal-content">
-                <div id="Tz_box" >
+                <!--Tz_box start-->
+                <div id="Tz_box">
                     <input type="file" id="input" size="10" style="visibility:hidden;">
                     <canvas id="Tz_wrap"></canvas>
                     <p class="ptit">请拖拽图片至此区域</p>
@@ -389,15 +426,14 @@
                     <div class="btnbox">
                         <div id="rotateLeftBtn">↶<span>左旋转</span></div>
                         <div id="rotateRightBtn">↷<span>左旋转</span></div>
-                        <div id="uploadAvatar">⇧<span>上传图片</span></div>
-                        <div id="sendAvatar">➥<span>确认发送</span></div>
+                        <div id="upload">⇧<span>上传图片</span></div>
+                        <div id="send">➥<span>确认发送</span></div>
                     </div>
                     <!--btnbox end-->
                     <!--showbox start-->
                     <div class="showbox">
                         <canvas id="preview180" class="preview"></canvas>
                         <span class="tit">图片预览:180*180</span>
-                        <!--此处以下会生成一个imag标签，读取标签的src用于js传到后端-->
                         <div class="prev"><img src="" alt="" id="imgg"></div>
                         <span class="tit">生成图片可右键保存到本地</span>
                     </div>
@@ -405,7 +441,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button class="btn btn-primary">提交</button>
+                        <button class="btn btn-primary" onclick="updateavatar()">提交</button>
                 </div>
 
 
