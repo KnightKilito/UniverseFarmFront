@@ -95,14 +95,6 @@
                         alert(result.msg);
                         location.href = "login.html";
                     } else {
-                        //取出里面用户对象用于更新
-                        var user = result.data;
-                        $("#myuserid").val(user.user_id);  //用户id
-                        $("#userlname").val(user.user_lname);
-                        $("#userrname").val(user.user_rname);
-                        $("#useraddress").val(user.user_address);
-                        $("#userphone").val(user.user_phone);
-                        $("#userphoto").val(user.userPhoto);
 
                         //将用户信息填充到页面上
                         $("#userlname").html(result.data.userAccount);
@@ -140,9 +132,12 @@
             //  角色不用修改，登录名不用修改，积分不用修改
             //获取要修改数据
 
-            var userrname=$("#updateuserrname").val();
-            var tel = $("#updateuserphone").val();
-            var address = $("#updateuseraddress").val();
+            var updateUserRname=$("#updateuserrname").val();
+            var updateUserPhone = $("#updateuserphone").val();
+            var updateUserAddress = $("#updateuseraddress").val();
+            console.log(updateUserRname);
+            console.log(updateUserPhone);
+            console.log(updateUserAddress);
             /*性别*/
             /*var i = 0;
             for (i; i < list.length; i++) {
@@ -156,13 +151,14 @@
                 dataType: "json",
                 type: "get",
                 data: {
-                    userrname: userrname,
-                    phone: tel,
-                    address: address
+                    userRname: updateUserRname,
+                    phone: updateUserPhone,
+                    address: updateUserAddress
                 },
                 xhrFields: {                               //保存session在跨域访问中不会丢失！！！
                     withCredentials: true
                 },
+                async: true,
                 crossDomain: true,
                 success: function (result) {
                     if (result.flag == 0) {
@@ -293,8 +289,9 @@
             </div>
         </div>
         <div class="container">
+<!--            "container": "#testimonials-one-box",-->
             <div class="thm-tiny__slider" id="testimonials-one-box" data-tiny-options='{
-            "container": "#testimonials-one-box",
+
             "items": 1,
             "slideBy": "page",
             "gutter": 0,
