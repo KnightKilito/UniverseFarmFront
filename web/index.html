@@ -43,7 +43,30 @@
                     if (result.flag == 1) {
                         //说明已经登录
                         $("#logininfo").html("欢迎你，" + result.data.userName + "&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='loginout()'>注销</a>");
-                        $("#userinfo").html("<a href='userinfo.html'><i className='organik-icon-user'></i>My Account</a>");
+                       $("#userinfo").html("<ul class=\"main-menu__list\"><li class=\"dropdown\"><a href='index.html'><i className='organik-icon-user'></i>个人中心</a> " +
+                           "<ul>\n" +
+                           "<li>\n" +
+                           "<a href=\"userinfo.html\">个人信息修改</a></li>\n" +
+                           "<li><a href=\"index-2.html\">发布自己的元产品</a></li>\n" +
+                           " <li><a href=\"index-2.html\">显示个人信息</a></li>\n" +
+                           " <li><a href=\"index-2.html\">交易记录</a></li>\n" +
+                           " <li><a href=\"index-2.html\">个人产品</a></li>\n" +
+                           "</li>\n" +
+                           "</ul>"+
+                           "</li>"
+                       );
+                       /* $("#userinfo").html("<a href='userinfo.html'><li class=\"dropdown\"><i className='organik-icon-user'></i>个人中心</a> "+
+                            <ul>
+                            <li>
+                            <a href="personal.html">个人信息修改</a></li>
+                        <li><a href="index-2.html">发布自己的元产品</a></li>
+                        <li><a href="index-2.html">显示个人信息</a></li>
+                        <li><a href="index-2.html">交易记录</a></li>
+                        <li><a href="index-2.html">个人产品</a></li>
+                            </li>
+                            </ul>
+                                );
+                                */
                     } else {
                         //说明未登录
                         $("#logininfo").html("<a href='login.html' class='green'>登录</a> /<a href='register.html' class='green'>免费注册</a>");
@@ -169,25 +192,43 @@
                 </div>
                 <ul class="main-menu__list">
                     <li class="dropdown">
-                        <a href="index.html">Home</a>
+                        <a href="index.html">主页</a>
                         <ul>
-                            <li>
-                                <a href="index.html">Home One</a>
-                            </li>
-                            <li><a href="index-2.html">Home Two</a></li>
-                            <li class="dropdown">
+                            <li><a href="index.html">主界页</a></li>
+                            <li><a href="#shangpin">商品</a></li>
+                            <li><a href="#jianjie">简介</a></li>
+                            <li><a href="#gonglue">攻略</a></li>
+                            <!--<li class="dropdown">
                                 <a href="#">Header Styles</a>
                                 <ul>
                                     <li><a href="index.html">Header One</a></li>
                                     <li><a href="index-2.html">Header Two</a></li>
                                 </ul>
-                            </li>
+                            </li>-->
                         </ul>
                     </li>
+                    <li class="dropdown">
+                        <a href="products.html">交易市场</a>
+                        <!--<ul>
+                            <li><a href="products.html">Shop</a></li>
+                            <li><a href="product-details.html">Product Details</a></li>
+                            <li><a href="car.html">Cart Page</a></li>
+                            <li><a href="checkout.html">Checkout</a></li>
+                        </ul>-->
+                    </li>
+                    <li class="dropdown"><a href="news.html">购物车</a>
+                        <!--<ul>
+                            <li><a href="news.html">购物车</a></li>
+                            <li><a href="news-details.html">News Details</a></li>
+                        </ul>-->
+                    </li>
+                    <li><a href="contact.html">个人农场</a></li>
+                    <li><a href="contact.html">农场社区</a></li>
+                </ul>
                     <!--<li>
                     <a href="about.html">About</a>
                     </li>-->
-                    <li class="dropdown">
+                    <!--<li class="dropdown">
                         <a href="products.html">Shop</a>
                         <ul>
                             <li><a href="products.html">Shop</a></li>
@@ -203,7 +244,7 @@
                         </ul>
                     </li>
                     <li><a href="contact.html">Contact</a></li>
-                </ul>
+                </ul>-->
                 <div class="main-menu__language">
                     <img src="static/picture/flag-1-0.jpg" alt="">
                     <label class="sr-only" for="language-select">选择语言</label>
@@ -334,7 +375,7 @@
             </div>
         </div>
     </section>
-    <section class="new-products">
+    <section class="new-products" id="shangpin">
         <img src="static/picture/new-product-shape-1.png" alt="" class="new-products__shape-1">
         <div class="container">
             <div class="new-products__top">
@@ -641,9 +682,9 @@
                 </div>
                 <div class="col-md-12 col-lg-12 col-xl-6 clearfix">
                     <div class="call-to-action__content">
-                        <div class="block-title text-left">
+                        <div class="block-title text-left" id="jianjie">
                             <div class="block-title__decor"
-                                 style="background-image: url(static/images/leaf-2-1.png);"></div>
+                                 style="background-image: url(static/images/leaf-2-1.png);" ></div>
 
                             <p>Shopping Store</p>
                             <h3>游戏简介</h3>
@@ -784,7 +825,7 @@
                 <div class="col-lg-12 col-xl-6">
                     <div class="call-to-action-two__content">
                         <div class="block-title text-left">
-                            <div class="block-title__decor"></div>
+                            <div class="block-title__decor" id="gonglue"></div>
 
                             <h3>Universe Farm攻略</h3>
                         </div>
@@ -793,7 +834,7 @@
                                 <h4>Duis aute irure dolor in reprehen in derit.</h4>
                                 <p>Voluptate velit essects quis tempor orci. Suspendisse that potenti faucibus.</p>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6" >
                                 <ul class="list-unstyled">
                                     <li>
                                         <i class="far fa-check-circle"></i>
@@ -1104,82 +1145,85 @@
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
                 <div class="footer-widget footer-widget__about-widget">
                     <a href="index.html" class="footer-widget__logo">
-                        <img src="static/picture/logo-light.png" alt="" width="105" height="43">
+                        <img src="static/picture/universe.PNG" alt="" width="250" height="80">
                     </a>
-                    <p class="thm-text-dark">Atiam rhoncus sit amet adip
-                        scing sed ipsum. Lorem ipsum
-                        dolor sit amet adipiscing <br>
-                        sem neque.</p>
+                    <p class="thm-text-dark">
+                    请相信快乐的想法，从没有离开过我们的身旁，<br>
+                        就像网络上虚拟的农场，终会成为现实的天堂。
+                    </p>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2">
                 <div class="footer-widget footer-widget__contact-widget">
-                    <h3 class="footer-widget__title">Contact</h3>
+                    <h3 class="footer-widget__title">联系我们</h3>
                     <ul class="list-unstyled footer-widget__contact">
                         <li>
                             <i class="fa fa-phone-square"></i>
-                            <a href="tel:666-888-0000">666 888 0000</a>
+                            <a href="tel:18360495939">18360495939</a>
                         </li>
                         <li>
                             <i class="fa fa-envelope"></i>
                             <a href="/cdn-cgi/l/email-protection#8be2e5ede4cbe8e4e6fbeae5f2a5e8e4e6"><span
-                                    class="__cf_email__" data-cfemail="620b0c040d22010d0f12030c1b4c010d0f">[email&#160;protected]</span></a>
+                                    class="__cf_email__" data-cfemail="620b0c040d22010d0f12030c1b4c010d0f">1776356421@qq.com</span></a>
                         </li>
                         <li>
                             <i class="fa fa-map-marker-alt"></i>
-                            <a href="#">77 top broklyn street.
-                                New York</a>
+                            <a href="#">福建省厦门市集美大学诚毅学院
+                                </a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2">
                 <div class="footer-widget footer-widget__links-widget">
-                    <h3 class="footer-widget__title">Links</h3>
+                    <h3 class="footer-widget__title">为你推荐</h3>
                     <ul class="list-unstyled footer-widget__links">
                         <li>
-                            <a href="index.html">Top Sellers</a>
+                            <a href="index.html">热卖榜单</a>
                         </li>
                         <li>
-                            <a href="products.html">Shopping</a>
+                            <a href="products.html">购物</a>
                         </li>
                         <li>
-                            <a href="about.html">About Store</a>
+                            <a href="about.html">关于我们</a>
                         </li>
                         <li>
-                            <a href="contact.html">Contact</a>
+                            <a href="contact.html">反馈</a>
                         </li>
                         <li>
-                            <a href="contact.html">Hedddd</a>
+                            <a href="contact.html">客服</a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2">
                 <div class="footer-widget">
-                    <h3 class="footer-widget__title">Explore</h3>
+                    <h3 class="footer-widget__title">配送方式</h3>
                     <ul class="list-unstyled footer-widget__links">
                         <li>
-                            <a href="products.html">New Products</a>
+                            <a href="products.html">上门自提</a>
                         </li>
                         <li>
-                            <a href="checkout.html">My Account</a>
+                            <a href="checkout.html">211限时达</a>
                         </li>
                         <li>
-                            <a href="contact.html">Support</a>
+                            <a href="contact.html">配送服务查询</a>
                         </li>
                         <li>
-                            <a href="contact.html">FAQs</a>
+                            <a href="contact.html">海外配送</a>
+                        </li>
+                        <li>
+                            <a href="contact.html">配送费收取标准</a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
                 <div class="footer-widget">
-                    <h3 class="footer-widget__title">Newsletter</h3>
+                    <h3 class="footer-widget__title">售后服务</h3>
                     <form action="#" data-url="YOUR_MAILCHIMP_URL" class="mc-form">
-                        <input type="email" name="EMAIL" id="mc-email" placeholder="Email Address">
-                        <button type="submit">Subscribe</button>
+                        <input type="email" name="EMAIL" id="mc-email" placeholder="退款说明">
+                        <button type="submit">价格保护</button>
                     </form>
                     <div class="mc-form__response"></div>
                 </div>
