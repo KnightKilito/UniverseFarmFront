@@ -11,7 +11,8 @@
             //获取用户输入的登录名字和密码
             var myname= $("#myname").val();
             var mypwd=$("#mypwd").val();
-
+            if(myname=='') alert("用户名不得为空");
+            if(mypwd=='') alert("密码不得为空");
             $.ajax({
                 url: "http://localhost:8088/UniverseFarmBack/Login.do",
                 dataType:"json",
@@ -38,9 +39,17 @@
 
 
         }
-
-
-
+    </script>
+    <script>
+        function  myregister(){
+            //获取用户输入的登录名字和密码
+            var accountname= $("#accountname").val();
+            var password=$("#password").val();
+            var password2=$("#password2").val();
+            if (password!=password2) alert("两次密码输入不一致，请重新输入");
+            if(accountname=='') alert("用户名不得为空");
+            if(password=='') alert("密码不得为空");
+        }
     </script>
 </head>
 <body>
@@ -57,9 +66,10 @@
             <!-- <span>or use your email for registration</span> -->
             <br>
             <input id="accountname" type="text" placeholder="用户名" />
-            <input id="password" type="password" placeholder="输入密码" />
-            <span class="hidden" id="success-sign-up">注册成功!</span>
-            <button id="accountSignUp">注册</button>
+            <input id="password" type="password" placeholder="密码" />
+            <input id="password2" type="password" placeholder="确认密码" />
+            <span class="hidden" id="success-sign-up">succeed!</span>
+            <button id="accountSignUp" onclick="myregister()">Sign Up</button>
         </form>
     </div>
     <div class="form-container sign-in-container">
