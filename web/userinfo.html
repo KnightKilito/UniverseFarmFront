@@ -183,7 +183,7 @@
             var canvas = document.createElement('canvas');
             var dataURL = canvas.toDataURL('image/jpeg', 0.5);
             var fd = new FormData(document.forms[0]);
-            fd.append("the_file", blob, 'avatarImg.png');
+            fd.append("file", blob, 'avatarImg.png');
             //上面的the_file为这个文件的key，等效于input中的name
             // image.png则是文件名，由于base64的图片信息是不带文件名的，所以可以手动指定一个，这个参数是可选的
 
