@@ -177,18 +177,32 @@
         }
         //更新头像
         function updateavatar(){
-            var formData = new FormData();
+            var avatarImg=$("#imgg").attr("src");
+            var blob = dataURItoBlob(avatarImg); // 上一步中的函数
+            //借助html5的canvas
+            var canvas = document.createElement('canvas');
+            var dataURL = canvas.toDataURL('image/jpeg', 0.5);
+            var fd = new FormData(document.forms[0]);
+            fd.append("the_file", blob, 'avatarImg.png');
+            //上面的the_file为这个文件的key，等效于input中的name
+            // image.png则是文件名，由于base64的图片信息是不带文件名的，所以可以手动指定一个，这个参数是可选的
+
+            /*var formData = new FormData();
             console.log(formData);
-            formData.append("file",$("#prev")[0].files[0]);
-            //formData.append("name",name);
+            formData.append("file",$("#prev")[0].files[0]);*/
+            //获取上传的头像
+
+            //console.log(avatarImg);
             $.ajax({
-                url : "http://localhost:8088/shopback/uploadUserAvatar.do",
+                url : "http://localhost:8088/UniverseFarmBack/uploadUserAvatar.do",
                 type : 'POST',
-                data : formData,
                 // 告诉jQuery不要去处理发送的数据
                 processData : false,
                 // 告诉jQuery不要去设置Content-Type请求头
                 contentType : false,
+                /*dataType: 'json',*/
+                data : fd ,
+
                 xhrFields: {                               //保存session在跨域访问中不会丢失！！！
                     withCredentials: true
                 },
@@ -202,14 +216,28 @@
                     }else{
                         alert("头像上传成功！");
                         //设置头像
-                        $("#userlogo2").html('<img src="http://localhost:8088/UniverseFarmBack/upload/'+result.data+'"  width="90" height="90">  <div class="background_img"></div>');
-
+                        $("#userphoto").html("<img src='static/picture/avatar/"+result.data.userPhoto+"' alt=''/>");
+                        $("#updateuserphoto").html("<img src='static/picture/avatar/"+result.data.userPhoto+"' alt=''/>");
                     }
                 },
                 error : function(result) {
                     console.log("error");
                 }
             });
+        }
+        //整理一下base64的前面几个字符，预处理以后转换成Blob对象，这个之后稍作处理可以放在formData中
+        function dataURItoBlob(base64Data) {
+            var byteString;
+            if (base64Data.split(',')[0].indexOf('base64') >= 0)
+                byteString = atob(base64Data.split(',')[1]);
+            else
+                byteString = unescape(base64Data.split(',')[1]);
+            var mimeString = base64Data.split(',')[0].split(':')[1].split(';')[0];
+            var ia = new Uint8Array(byteString.length);
+            for (var i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+            return new Blob([ia], {type:mimeString});
         }
     </script>
 </head>
@@ -434,6 +462,7 @@
                     <div class="showbox">
                         <canvas id="preview180" class="preview"></canvas>
                         <span class="tit">图片预览:180*180</span>
+                        <!--此处会填充src-->
                         <div class="prev"><img src="" alt="" id="imgg"></div>
                         <span class="tit">生成图片可右键保存到本地</span>
                     </div>
