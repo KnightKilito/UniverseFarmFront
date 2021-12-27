@@ -44,11 +44,11 @@
     </script>
 </head>
 <body>
-<h2>欢迎来到Universe Farm</h2>
+<p style="font-size: 30px ;color: #00AA86;font-weight: bolder;">Universe Farm</p>
 <div class="container" id="container">
     <div class="form-container sign-up-container">
         <form action="#">
-            <h1>Create Account</h1>
+            <h1>注册账号</h1>
             <!-- <div class="social-container">
             <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
@@ -56,15 +56,15 @@
             </div> -->
             <!-- <span>or use your email for registration</span> -->
             <br>
-            <input id="accountname" type="text" placeholder="Account Name" />
-            <input id="password" type="password" placeholder="Password" />
-            <span class="hidden" id="success-sign-up">succeed!</span>
-            <button id="accountSignUp">Sign Up</button>
+            <input id="accountname" type="text" placeholder="用户名" />
+            <input id="password" type="password" placeholder="输入密码" />
+            <span class="hidden" id="success-sign-up">注册成功!</span>
+            <button id="accountSignUp">注册</button>
         </form>
     </div>
     <div class="form-container sign-in-container">
         <form action="#">
-            <h1>Sign in</h1>
+            <h1>登录</h1>
             <!-- <div class="social-container">
             <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
@@ -72,30 +72,30 @@
             </div> -->
             <!-- <span>or use your account</span> -->
             <br>
-            <input id="myname" type="text" placeholder="Account Name" />
-            <input id="mypwd" type="password" placeholder="Password" />
-            <span class="hidden" id="success-sign-in">succeed!</span>
-            <span class="hidden" id="fail-sign-in">something wrong!</span>
+            <input id="myname" type="text" placeholder="用户名" />
+            <input id="mypwd" type="password" placeholder="请输入密码" />
+            <span class="hidden" id="success-sign-in">登录成功</span>
+            <span class="hidden" id="fail-sign-in">登陆失败</span>
             <!-- <a href="#">Forgot your password?</a> -->
             <br>
-            <button type="button" id="accountSignIn" onclick="mylogin()">Sign In</button>
+            <button type="button" id="accountSignIn" onclick="mylogin()">登录</button>
         </form>
     </div>
     <div class="overlay-container">
         <div class="overlay">
             <div class="overlay-panel overlay-left">
-                <h1>Welcome Back!</h1>
-                <p>To keep connected with us please login with your personal info</p>
-                <button class="ghost" id="signIn">Sign In</button>
+                <h1>欢迎回来！</h1>
+                <p>请使用您的个人信息登录，保持与我们的联系</p>
+                <button type="button" class="ghost" id="signIn">登录</button>
             </div>
             <div class="overlay-panel overlay-right">
-                <h1>Hello, Friend!</h1>
-                <p>Enter your personal details and start journey with us</p>
-                <button class="ghost" id="signUp">Sign Up</button>
+                <h1>你好，新朋友!</h1>
+                <p>输入您的个人详细信息，与我们一起开始旅程</p>
+                <button class="ghost" id="signUp">注册</button>
             </div>
         </div>
     </div>
 </div>
-<!--​-->
-<!--<script async src="js/login.js"></script>-->
+
+<script async src="js/login.js"></script>
 </body>

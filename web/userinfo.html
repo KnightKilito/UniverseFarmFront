@@ -95,14 +95,6 @@
                         alert(result.msg);
                         location.href = "login.html";
                     } else {
-                        //取出里面用户对象用于更新
-                        var user = result.data;
-                        $("#myuserid").val(user.user_id);  //用户id
-                        $("#userlname").val(user.user_lname);
-                        $("#userrname").val(user.user_rname);
-                        $("#useraddress").val(user.user_address);
-                        $("#userphone").val(user.user_phone);
-                        $("#userphoto").val(user.userPhoto);
 
                         //将用户信息填充到页面上
                         $("#userlname").html(result.data.userAccount);
