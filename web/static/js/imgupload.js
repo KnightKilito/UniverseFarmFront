@@ -88,7 +88,7 @@ function oper() {
     /*旋转图片 end*/
     /*上传图片 start*/
     $send.click(function () {
-        imgData = cropper.getCroppedImageData(180, 180);
+        imgData = cropper.getCroppedImageData(158, 158);
         $('#imgg').attr('src', imgData)
         console.log("上传了：" + imgData);
     })
