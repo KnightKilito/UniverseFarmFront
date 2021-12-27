@@ -389,14 +389,15 @@
                     <div class="btnbox">
                         <div id="rotateLeftBtn">↶<span>左旋转</span></div>
                         <div id="rotateRightBtn">↷<span>左旋转</span></div>
-                        <div id="upload">⇧<span>上传图片</span></div>
-                        <div id="send">➥<span>确认发送</span></div>
+                        <div id="uploadAvatar">⇧<span>上传图片</span></div>
+                        <div id="sendAvatar">➥<span>确认发送</span></div>
                     </div>
                     <!--btnbox end-->
                     <!--showbox start-->
                     <div class="showbox">
                         <canvas id="preview180" class="preview"></canvas>
                         <span class="tit">图片预览:180*180</span>
+                        <!--此处以下会生成一个imag标签，读取标签的src用于js传到后端-->
                         <div class="prev"><img src="" alt="" id="imgg"></div>
                         <span class="tit">生成图片可右键保存到本地</span>
                     </div>

@@ -1,7 +1,7 @@
 
 var $Tz_wrap = $('#Tz_wrap');
-var $upLoad = $('#upload');
-var $send = $('#send');
+var $upLoadAvatar = $('#upLoadAvatar');
+var $sendAvatar = $('#sendAvatar');
 var $input = $('#input');
 var $rR = $('#rotateRightBtn');
 var $rL = $('#rotateLeftBtn');
@@ -65,7 +65,7 @@ function drag() {
 };
 function oper() {
     /*上传图片点击事件 start*/
-    $upLoad.click(function () {
+    $upLoadAvatar.click(function () {
         $input.click();
     });
     $input.click(function () {
@@ -87,7 +87,7 @@ function oper() {
     });
     /*旋转图片 end*/
     /*上传图片 start*/
-    $send.click(function () {
+    $sendAvatar.click(function () {
         imgData = cropper.getCroppedImageData(180, 180);
         $('#imgg').attr('src', imgData)
         console.log("上传了：" + imgData);
