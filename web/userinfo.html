@@ -178,12 +178,29 @@
         //更新头像
         function updateavatar(){
             var avatarImg=$("#imgg").attr("src");
-            var blob = dataURItoBlob(avatarImg); // 上一步中的函数
+            /*var blob = dataURItoBlob(avatarImg); // 上一步中的函数
             //借助html5的canvas
             var canvas = document.createElement('canvas');
             var dataURL = canvas.toDataURL('image/jpeg', 0.5);
             var fd = new FormData(document.forms[0]);
-            fd.append("file", blob, 'avatarImg.png');
+            fd.append("file", blob, 'avatarImg.png');*/
+
+
+
+//这里对base64串进行操作，去掉url头，并转换为byte
+            var bytes = window.atob(avatarImg.split(',')[1]);
+
+//处理异常，将ASCII码小于0的转换为大于0
+            var array = [];
+            for(var i = 0; i < bytes.length; i++){
+                array.push(bytes.charCodeAt(i));
+            }
+            var blob = new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
+            var fd = new FormData();
+            fd.append('file',blob, Date.now() + '.jpg');
+
+
+
             //上面的the_file为这个文件的key，等效于input中的name
             // image.png则是文件名，由于base64的图片信息是不带文件名的，所以可以手动指定一个，这个参数是可选的
 
