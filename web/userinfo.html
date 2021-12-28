@@ -241,8 +241,9 @@
                     }else{
                         alert("头像上传成功！");
                         //设置头像
-                        $("#userphoto").html("<img src='static/picture/avatar/"+result.data.userPhoto+"' alt=''/>");
-                        $("#updateuserphoto").html("<img src='static/picture/avatar/"+result.data.userPhoto+"' alt=''/>");
+                        $("#userphoto").html("<img src='http://localhost:8088/UniverseFarmBack/static/picture/avatar/"+result.data.userPhoto+"' alt=''/>");
+                        //http://localhost:8088/UniverseFarmBack/static/picture/avatar/1640652355689_1640652355651.jpg
+                        $("#updateuserphoto").html("<img src='http://localhost:8088/UniverseFarmBack/static/picture/avatar/"+result.data.userPhoto+"' alt=''/>");
                     }
                 },
                 error : function(result) {
@@ -556,7 +557,6 @@
 </div>
 
 
-<!--
 <div class="container">
     <div class="new-products__top">
         <div class="block-title ">
@@ -639,7 +639,6 @@
             </div>
         </div>
         </br>
--->
         <footer class="site-footer background-black-2">
             <img src="static/picture/footer-bg-1-1.png" alt="" class="site-footer__shape-1">
             <img src="static/picture/footer-bg-1-2.png" alt="" class="site-footer__shape-2">
