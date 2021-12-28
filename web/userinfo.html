@@ -125,9 +125,11 @@
                             $("#userphoto").html("<img src='static/picture/avatar/testi-1-1.png' alt=''/>");
                             $("#updateuserphoto").html("<img src='static/picture/avatar/testi-1-1.png' alt=''/>");
                         }else {
-                            $("#userphoto").html("<img src='static/picture/avatar/"+result.data.userPhoto+"' alt=''/>");
+                            $("#userphoto").html("<img src='http://localhost:8088/UniverseFarmBack/static/picture/avatar/"+result.data.userPhoto+"' alt=''/>");
+                            //D:\Program\IdeaProjects\UniverseFarmBack\out\artifacts\UniverseFarmBack_Web_exploded\static\picture\avatar
+                            //1640649492830_1640649492797.jpg
                             //对照组，看看user.user_photo跟result.data.userPhoto能不能用，结论是：user.user_photo不能用，是用来获取更新后信息的
-                            $("#updateuserphoto").html("<img src='static/picture/avatar/"+result.data.userPhoto+"' alt=''/>");
+                            $("#updateuserphoto").html("<img src='http://localhost:8088/UniverseFarmBack/static/picture/avatar/"+result.data.userPhoto+"' alt=''/>");
                         }
                     }
                 }
