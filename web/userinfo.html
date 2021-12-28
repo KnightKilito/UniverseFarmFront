@@ -446,7 +446,7 @@
 
                             <p ></p>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span>Update Avatar</span>
+                            <span>Update Avatar-000</span>
                         </div>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <button type="submit"  class="thm-btn" href="#mymodal" data-toggle='modal' >Upload</button>
@@ -456,12 +456,13 @@
             </div>
         </div>
     </section>
-    <div id="mymodal" class="modal fade bs-example-modal-lg">
+    <div id="mymodal" class="modal fade" >
         <!--相对定位，自适应宽高-->
         <!--当分辨率大于768px时，宽度为600px-->
 
-        <div class="modal-dialog" style="width: 800px">
-            <div class="modal-content">
+        <div class="modal-dialog" style="display: inline-block;left: 300px">
+            <div class="modal-content" style="align-content: center;width: 910px">
+                <div id="_modalDialog_body" class="modal-body">
                 <!--Tz_box start-->
                 <div id="Tz_box">
                     <input type="file" id="input" size="10" style="visibility:hidden;">
@@ -484,6 +485,7 @@
                         <span class="tit">生成图片可右键保存到本地</span>
                     </div>
                     <!--show box end-->
+                </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" data-dismiss="modal">关闭</button>
