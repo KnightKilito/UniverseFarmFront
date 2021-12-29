@@ -117,7 +117,7 @@
                             '<input id="myuserID" type="hidden" value="' + mydata[i].soilID + '" />' +
                             '<img src="http://localhost:8088/UniverseFarmBack/static/picture/goods/' + mydata[i].soilPhoto + '" alt="">' +
                             '<div class="product-card__two-image-content">' +
-                            '<a href="#"><i class="organik-icon-visibility"></i></a>' +
+                            '<a href="#" onclick="seeGoodDetail(' + mydata[i].soilId + ')"><i class="organik-icon-visibility"></i></a>' +
                             // '<a href="#"><i class="organik-icon-heart"></i></a>' +
                             '<a href="#" onclick="sendToMe(' + mydata[i].soilId + ')"><i class="organik-icon-shopping-cart"></i></a>' +
                             '</div>' +
@@ -144,13 +144,40 @@
 
 
 </script>
+<script>
+    //此处也可以用.do传后端再跑去新界面，但是为了尝试新方法~
+    //设置cookie传递id去产品详情界面
+    var setCookie = function (name, value, day) {
+        //当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
+        //var expires = day * 24 * 60 * 60 * 1000;
+        var expires = 0;
+        var exp = new Date();
+        exp.setTime(exp.getTime() + expires);
+        document.cookie = name + "=" + value + ";expires=" + exp.toUTCString();
+    };
+    //传递cookie
+    function seeGoodDetail(goodId){
+        /*var name = document.getElementById("userName");
+        var pass = document.getElementById("passwords");*/
+        /*setCookie('userName',name.value,7)*/
+        setCookie('goodId',goodId.value,0);
+        location.href = 'product-details.html';
+    }
+    //删除cookie
+    var delCookie = function (name) {
+        setCookie(name, ' ', -1);
+    };
+    function deletecookie() {
+        delCookie('userName',' ',-1)
+    }
+</script>
 <!-- 把东西寄给自己-->
 <script>
-    function sendToMe(goodsId) {
+    function sendToMe(goodId) {
         $.ajax({
             url: "http://localhost:8088/UniverseFarmBack/addCart.do",
             dataType: "json",
-            data: {soilinfoid: goodsId},
+            data: {soilinfoid: goodId},
             type: "get",
             xhrFields: {
                 withCredentials: true
