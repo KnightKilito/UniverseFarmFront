@@ -92,7 +92,7 @@
         $(document).ready(function () {
             //加载当前的登录用户
             $.ajax({
-                url: "http://localhost:8088/UniverseFarmBack/getLoginUser.do",
+                url: "http://localhost:8088/UniverseFarmBack/getSoilByUserId.do",
                 dataType: "json",
                 type: "get",
                 xhrFields: {                               //保存session在跨域访问中不会丢失！！！
@@ -101,8 +101,7 @@
                 crossDomain: true,
                 success: function (result) {
                     if (result.flag == 0) {
-                        alert(result.msg);
-                        location.href = "login.html";
+                        console.log("您没有土地");
                     } else {
 
                         //将用户信息填充到页面上
@@ -251,7 +250,7 @@
                 }
             });
         }
-        //整理一下base64的前面几个字符，预处理以后转换成Blob对象，这个之后稍作处理可以放在formData中
+        /*//整理一下base64的前面几个字符，预处理以后转换成Blob对象，这个之后稍作处理可以放在formData中
         function dataURItoBlob(base64Data) {
             var byteString;
             if (base64Data.split(',')[0].indexOf('base64') >= 0)
@@ -264,7 +263,58 @@
                 ia[i] = byteString.charCodeAt(i);
             }
             return new Blob([ia], {type:mimeString});
-        }
+        }*/
+    </script>
+    <script>
+        //当文档加载完毕时触发
+        $(document).ready(function () {
+            //加载当前的登录用户
+            $.ajax({
+                url: "http://localhost:8088/UniverseFarmBack/getLoginUser.do",
+                dataType: "json",
+                type: "get",
+                xhrFields: {                               //保存session在跨域访问中不会丢失！！！
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success: function (result) {
+                    if (result.flag == 0) {
+                        alert(result.msg);
+                        location.href = "login.html";
+                    } else {
+
+                        //将用户信息填充到页面上
+                        $("#userlname").html(result.data.userAccount);
+                        var input = document.getElementById("userlname");  //获取input对象
+                        /*input.setAttribute("value", result.data.userAccount);  //为input对象设置value属性和值*/
+                        $("#userrname").html(result.data.userName);
+                        input = document.getElementById("updateuserrname");
+                        input.setAttribute("value", result.data.userName);
+                        $("#useraddress").html(result.data.userAddressed);
+                        input = document.getElementById("updateuseraddress");
+                        input.setAttribute("value", result.data.userAddressed);
+                        $("#userphone").html(result.data.userPhone);
+                        input = document.getElementById("updateuserphone");
+                        input.setAttribute("value", result.data.userPhone);
+                        $("#userintegral").html("虚拟货币："+result.data.userIntegral);
+                        /*console.log("user.user_photo照片对象："+user.user_photo);
+                        console.log("result.data.userPhoto照片对象："+result.data.userPhoto);*/
+                        if(result.data.userPhoto==null){
+                            $("#userphoto").html("<img src='static/picture/avatar/testi-1-1.png' alt=''/>");
+                            $("#updateuserphoto").html("<img src='static/picture/avatar/testi-1-1.png' alt=''/>");
+                        }else {
+                            $("#userphoto").html("<img src='http://localhost:8088/UniverseFarmBack/static/picture/avatar/"+result.data.userPhoto+"' alt=''/>");
+                            //D:\Program\IdeaProjects\UniverseFarmBack\out\artifacts\UniverseFarmBack_Web_exploded\static\picture\avatar
+                            //1640649492830_1640649492797.jpg
+                            //对照组，看看user.user_photo跟result.data.userPhoto能不能用，结论是：user.user_photo不能用，是用来获取更新后信息的
+                            $("#updateuserphoto").html("<img src='http://localhost:8088/UniverseFarmBack/static/picture/avatar/"+result.data.userPhoto+"' alt=''/>");
+                        }
+                    }
+                }
+            });
+        });
+
+
     </script>
 </head>
 <body>
