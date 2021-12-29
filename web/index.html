@@ -19,8 +19,107 @@
 <link rel="stylesheet" href="static/css/odometer.min.css" />
 <link rel="stylesheet" href="static/css/swiper.min.css" />
 <link rel="stylesheet" href="static/css/tiny-slider.min.css" />
-
+ <link href="css/common.css" rel="stylesheet" type="text/css" />
+ <link href="css/style.css" rel="stylesheet" type="text/css" />
+ <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+ <script src="js/jquery.SuperSlide.2.1.1.js" type="text/javascript"></script>
+ <script src="js/common_js.js" type="text/javascript"></script>
+ <script src="js/footer.js" type="text/javascript"></script>
 <link rel="stylesheet" href="static/css/organik.css" />
+ <script>
+
+
+
+
+  //当文档加载完成后再执行
+  $(document).ready(function(){
+   $.ajax({
+    url: "http://localhost:8088/UniverseFarmBack/isLogin.do",
+    dataType:"json",
+    type:"get",
+    xhrFields: {
+     withCredentials: true
+    },
+    crossDomain: true,
+    success:function(result){
+     if (result.flag == 1) {
+      //说明已经登录
+      $("#logininfo").html("欢迎你，" + result.data.userName+"&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='loginout()'>注销</a>");
+     } else {
+      //说明未登录
+      $("#logininfo").html("<a href='login.html' class='green'>登录</a> /<a href='register.html' class='green'>免费注册</a>");
+     }
+    }
+   });
+   // //加载饮料导航栏
+   // $(document).ready(function(){
+   //  myshow("饮料",8,"list_more_drinks");
+   // });
+   //
+   // //加载评分前四的饮料
+   // $(document).ready(function(){
+   //  mygetDataByTypeAndLimit("饮料",4,"lists_drinks");
+   // });
+   //
+   // //加载零食导航栏
+   // $(document).ready(function(){
+   //  myshow("零食",8,"list_more_foods");
+   // });
+   //
+   // //加载评分前四的零食
+   // $(document).ready(function(){
+   //  mygetDataByTypeAndLimit("零食",4,"lists_foods");
+   // });
+   //
+   // //加载生鲜导航栏
+   // $(document).ready(function(){
+   //  myshow("生鲜",8,"list_more_vegetable");
+   // });
+   //
+   // //加载评分前四的蔬菜生鲜
+   // $(document).ready(function(){
+   //  mygetDataByTypeAndLimit("生鲜",4,"lists_vegetable");
+   // });
+   //
+   // //加载调料导航栏
+   // $(document).ready(function(){
+   //  myshow("调味",8,"list_more_condiment");
+   // });
+   // //加载评分前四的柴米油盐酱醋茶
+   // $(document).ready(function(){
+   //  mygetDataByTypeAndLimit("调味",4,"lists_condiment");
+   // });
+
+
+
+
+  });
+
+
+ </script>
+ <script>
+  function  loginout(){
+   $.ajax({
+    url: "http://localhost:8088/UniverseFarmBack/loginOut.do",
+    dataType:"json",
+    type:"get",
+    xhrFields: {
+     withCredentials: true
+    },
+    crossDomain: true,
+    success:function(result){
+     alert(result.msg);
+     //跳转到登录页面？刷新页面
+     location.reload();
+    }
+   });
+
+
+  }
+
+
+
+ </script>
 </head>
 <body>
 <div class="preloader">
@@ -31,6 +130,7 @@
 <header class="main-header">
 <div class="topbar">
 <div class="container">
+ <div id="logininfo"></div>
 <div class="main-logo">
 <a href="index.html" class="logo">
 <img src="static/picture/universe.PNG" width="300" alt="">
@@ -67,7 +167,7 @@
 <nav class="main-menu">
 <div class="container">
 <div class="main-menu__login">
-<a href="#"><i class="organik-icon-user"></i>Login / Register</a>
+<!-- <i class="organik-icon-user"> <div id="logininfo"></div></i>-->
 </div>
 <ul class="main-menu__list">
 <li class="dropdown">
@@ -1130,7 +1230,7 @@ New York</a>
 </select>
 </div>
 <div class="main-menu__login">
-<a href="#"><i class="organik-icon-user"></i>Login / Register</a>
+<a href="login.html"><i class="organik-icon-user"></i>Login / Register</a>
 </div>
 </div>
 </div>

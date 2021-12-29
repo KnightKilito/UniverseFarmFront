@@ -27,37 +27,41 @@
 
 
     <script>
-  function  mylogin(){
-      //获取用户输入的登录名字和密码
-    var myname= $("#myname").val();
-    var mypwd=$("#mypwd").val();
+        function  mylogin(){
+            //获取用户输入的登录名字和密码
+            var myname= $("#myname").val();
+            var mypwd=$("#mypwd").val();
 
-      $.ajax({
-          url: "http://localhost:8088/UniverseFarmBack/Login.do",
-          dataType:"json",
-          data:{name:myname,pwd:mypwd},
-          type:"get",
-          xhrFields: {                               //保存session在跨域访问中不会丢失！！！
-              withCredentials: true
-          },
-          crossDomain: true,
-          success:function(result){
-          if(result.flag==0){
-            alert(result.msg);
-        }else if(result.flag==1){
-            alert(result.msg);
-        }else if(result.flag==2){
-            //登录成功
-            alert(result.msg);
-            //跳转到index.html
-            location.href="index.html";
+            $.ajax({
+                url: "http://localhost:8088/UniverseFarmBack/Login.do",
+                dataType:"json",
+                data:{name:myname,pwd:mypwd},
+                type:"get",
+                xhrFields: {                               //保存session在跨域访问中不会丢失！！！
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success:function(result){
+                    if(result.flag==0){
+                        alert(result.msg);
+                    }else if(result.flag==1){
+                        alert(result.msg);
+                    }else if(result.flag==2){
+                        //登录成功
+                        alert(result.msg);
+                        //跳转到index.html
+                        location.href="index.html";
+                    }
+                }
+            });
+
+
+
         }
-          }
-      });
 
 
 
-  }
+    </script>
 
 
 
