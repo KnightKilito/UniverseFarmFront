@@ -79,12 +79,9 @@
                     location.reload();
                 }
             });
-
-
         }
-
-
     </script>
+
     <script>
         //全局变量
         var globalpage = 1;
@@ -105,7 +102,7 @@
          */
         function mypage(page, size) {
             $.ajax({
-                url: "http://localhost:8088/UniverseFarmBack/getSoilsByPage.do",
+                url: "http://localhost:8088/UniverseFarmBack/getSoilsByPageAndUserID.do",
                 dataType: "json",
                 data: {page: page, size: size},
                 type: "get",
@@ -292,11 +289,11 @@
         <div class="page-header__bg" style="background-image: url(static/images/page-header-bg-1-1.jpg);"></div>
 
         <div class="container">
-            <h2>农场</h2>
+            <h2>我的农场</h2>
             <ul class="thm-breadcrumb list-unstyled">
                 <li><a href="index.html">主页</a></li>
                 <li>/</li>
-                <li><span>Soils</span></li>
+                <li><span>My Soils</span></li>
             </ul>
         </div>
     </section>
