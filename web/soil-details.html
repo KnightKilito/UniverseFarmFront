@@ -144,6 +144,26 @@
         })
     </script>
     <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
+<!--    浇水-->
+    <script>
+        var soilId=window.localStorage.getItem('soilId');
+        function irrigate()
+        {
+            $.ajax({
+                url: "http://localhost:8088/UniverseFarmBack/irrigate.do",
+                dataType: "json",
+                data:{soilid:soilId},
+                type: "get",
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success: function (result) {
+                    alert(result.msg+",当前成熟度为"+result.data);
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 <div class="preloader">
@@ -273,7 +293,7 @@
 <div style="margin:0 auto">
     <!--此处添加功能按钮-->
     <a href="#mymodal" data-toggle='modal'><i class="organik-icon-visibility"></i></a>
-    <a href="#" ><i class="fa fa-tree" aria-hidden="true"></i></a>
+    <a onclick="irrigate()" ><i class="fa fa-tree" aria-hidden="true"></i></a>
     <a href="cart-soil.html" onclick="soilAdd()"><i class="organik-icon-shopping-cart"></i></a>
 </div>
 <!--此处插入aframe标签-->
