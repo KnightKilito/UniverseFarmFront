@@ -122,15 +122,15 @@
                         if(flag==1){
                             //填充浇水等自己农场才能用的按钮
 
-                            /*$("fucs").html("<a href='cart-soil.html' onClick='soilAdd()'><i className='organik-icon-shopping-cart'></i></a>"
+                            $("#fucs").html("<a onClick='irrigate()'><i class='fa fa-tree' aria-hidden='true'></i></a>"
                                 +""
                                 +""
-                            );*/
+                            );
 
                         }else{
                             //填充购买、偷能量等路人才能用的按钮
 
-                            $("fucs").html("<a href='cart-soil.html' onClick='soilAdd()'><i className='organik-icon-shopping-cart'></i></a>"
+                            $("#fucs").html("<a onClick='soilAdd()'><i className='organik-icon-shopping-cart'></i></a>"
                             +""
                             +""
                             );
@@ -320,7 +320,7 @@
 <div style="margin:0 auto" id="fucs">
     <!--此处添加功能按钮-->
     <a href="#mymodal" data-toggle='modal'><i class="organik-icon-visibility"></i></a>
-    <a onclick="irrigate()" ><i class="fa fa-tree" aria-hidden="true"></i></a>
+<!--    <a onclick="irrigate()" ><i class="fa fa-tree" aria-hidden="true"></i></a>-->
 
 </div>
 <!--此处插入aframe标签-->
