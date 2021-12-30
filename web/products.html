@@ -28,14 +28,14 @@
  <script>
   //全局变量
   var globalpage=1;
-  var globalsize=4;
+  var globalsize=8;
   var globalpageCount=0;
 
 
 
   //加载首页的数据
   $(document).ready(function(){
-   mypage(1,4);
+   mypage(1,8);
   });
  </script>
  <script>
@@ -70,7 +70,7 @@
        str=str+ '<div class="col-md-6 col-lg-4">'+
                '<div class="product-card">'+
                '<div class="product-card__image">'+
-               '<img src="http://localhost:8088/UniverseFarmBack/static/picture/goods/'+mydata[i].soilPhoto+'">'+
+               '<img src="static/picture/'+mydata[i].soilPhoto+'">'+
                '<div class="product-card__image-content">'+
                '<a href="#"><i class="organik-icon-heart"></i></a>'+
                '<a href="car.html"><i class="organik-icon-shopping-cart"></i></a>'+
