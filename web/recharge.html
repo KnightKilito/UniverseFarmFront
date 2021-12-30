@@ -7,6 +7,37 @@
     <script src="https://cdn.suoluomei.com/common/js/jquery-2.1.4.min.js"></script>
     <script src="https://cdn.suoluomei.com/common/js2.0/vue/v2.5.16/vue.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script>
+        function recharge(){
+            var userAccount=$("#user_account").val();
+            var userPhone=$("#user_phone").val();
+            $.ajax({
+                url: "http://localhost:8088/UniverseFarmBack/checkRechargeUser.do",
+                dataType: "json",
+                type: "get",
+                data: {
+                    userAccount: userAccount,
+                    userPhone: userPhone
+
+                },
+                xhrFields: {                               //保存session在跨域访问中不会丢失！！！
+                    withCredentials: true
+                },
+                async: true,
+                crossDomain: true,
+                success: function (result) {
+                    if (result.flag == 0) {
+                        //对应不上
+                        alert(result.msg);
+                    } else {
+                        //对应上
+                        alert(result.msg);
+                    }
+                }
+
+            });
+        }
+    </script>
 </head>
 <style>
     * {
@@ -179,16 +210,17 @@
     <div class="back">
         <div class="information">
             <span>用户名：</span>
-            <input type="text" placeholder="请输入用户名" v-model="name" onkeyup="value=value.replace(/[\d]/g,'') "
+            <input type="text" placeholder="请输入用户名" v-model="name" id="user_account">
+            <!--onkeyup="value=value.replace(/[\d]/g,'') " oninput="if(value.length>30)value=value.substring(0,30)"-->
 
-                   oninput="if(value.length>30)value=value.substring(0,30)">
+
             <span>电话：</span>
-            <input type="number" placeholder="请输入您的号码" v-model="phone"
+            <input type="number" placeholder="请输入您的号码" id="user_phone" v-model="phone"
                    onkeyup="this.value=this.value.replace(/\D/g,'')"
                    oninput="if(value.length>11)value=value.substring(0,11)">
-            <span>密码：</span>
+            <!--<span>密码：</span>
             <input type="number" placeholder="请输入密码" v-model="card"
-                   onkeyup="this.value=this.value.replace(/\D/g,'')">
+                   onkeyup="this.value=this.value.replace(/\D/g,'')">-->
         </div>
         <div class="choice">
             <p>请选择充值的金额</p>
