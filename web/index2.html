@@ -226,7 +226,7 @@
                     </a>
                     <div class="mobile-nav__buttons">
                         <a href="#" class="search-toggler"><i class="organik-icon-magnifying-glass"></i></a>
-                        <a href="car.html" class="mini-cart__toggler"><i class="organik-icon-shopping-cart"></i></a>
+                        <a href="#" class="mini-cart__toggler"><i class="organik-icon-shopping-cart"></i></a>
                     </div>
                     <span class="fa fa-bars mobile-nav__toggler"></span>
                 </div>
@@ -250,55 +250,73 @@
                     </div>
                     <div class="topbar__buttons">
                         <a href="#" class="search-toggler"><i class="organik-icon-magnifying-glass"></i></a>
-                        <a href="car.html"><i class="organik-icon-shopping-cart"></i></a>
+                        <a href="#" class="mini-cart__toggler"><i class="organik-icon-shopping-cart"></i></a>
                     </div>
                 </div>
             </div>
         </div>
         <nav class="main-menu">
             <div class="container">
-                <div class="main-menu__login">
-                    <!-- <i class="organik-icon-user"> <div id="logininfo"></div></i>-->
+                <!--个人信息页面-->
+                <div class="main-menu__login" id="userinfo">
                 </div>
                 <ul class="main-menu__list">
                     <li class="dropdown">
-                        <a href="index.html">Home</a>
+                        <a href="index.html">主页</a>
                         <ul>
-                            <li>
-                                <a href="index.html">Home One</a>
-                            </li>
-                            <li><a href="index-2.html">Home Two</a></li>
-                            <li class="dropdown">
+                            <li><a href="index.html">主界页</a></li>
+                            <li><a href="#shangpin">商品</a></li>
+                            <li><a href="#jianjie">简介</a></li>
+                            <li><a href="#gonglue">攻略</a></li>
+                            <!--<li class="dropdown">
                                 <a href="#">Header Styles</a>
                                 <ul>
                                     <li><a href="index.html">Header One</a></li>
                                     <li><a href="index-2.html">Header Two</a></li>
                                 </ul>
-                            </li>
+                            </li>-->
                         </ul>
                     </li>
-                    <!--<li>
-                    <a href="about.html">About</a>
-                    </li>-->
                     <li class="dropdown">
-                        <a href="products.html">Shop</a>
-                        <ul>
+                        <a href="products.html">交易市场</a>
+                        <!--<ul>
                             <li><a href="products.html">Shop</a></li>
                             <li><a href="product-details.html">Product Details</a></li>
                             <li><a href="car.html">Cart Page</a></li>
                             <li><a href="checkout.html">Checkout</a></li>
-                        </ul>
+                        </ul>-->
                     </li>
-                    <li class="dropdown"><a href="news.html">News</a>
-                        <ul>
-                            <li><a href="news.html">News</a></li>
+                    <li class="dropdown"><a href="car.html">购物车</a>
+                        <!--<ul>
+                            <li><a href="news.html">购物车</a></li>
                             <li><a href="news-details.html">News Details</a></li>
-                        </ul>
+                        </ul>-->
                     </li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="soils.html">个人农场</a></li>
+                    <li><a href="contact.html">农场社区</a></li>
                 </ul>
+                <!--<li>
+                <a href="about.html">About</a>
+                </li>-->
+                <!--<li class="dropdown">
+                    <a href="products.html">Shop</a>
+                    <ul>
+                        <li><a href="products.html">Shop</a></li>
+                        <li><a href="product-details.html">Product Details</a></li>
+                        <li><a href="cart.html">Cart Page</a></li>
+                        <li><a href="checkout.html">Checkout</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="news.html">News</a>
+                    <ul>
+                        <li><a href="news.html">News</a></li>
+                        <li><a href="news-details.html">News Details</a></li>
+                    </ul>
+                </li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>-->
                 <div class="main-menu__language">
-                    <img src="static/picture/flag-1-1.jpg" alt="">
+                    <img src="static/picture/flag-1-0.jpg" alt="">
                     <label class="sr-only" for="language-select">选择语言</label>
 
                     <select class="selectpicker" id="language-select-header">
@@ -308,7 +326,6 @@
                 </div>
             </div>
         </nav>
-
     </header>
     <div class="stricky-header stricked-menu main-menu">
         <div class="sticky-header__content"></div>
@@ -1217,82 +1234,192 @@
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
                 <div class="footer-widget footer-widget__about-widget">
                     <a href="index.html" class="footer-widget__logo">
-                        <img src="static/picture/logo-light.png" alt="" width="105" height="43">
+                        <img src="static/picture/universe.PNG" alt="" width="250" height="80">
                     </a>
-                    <p class="thm-text-dark">Atiam rhoncus sit amet adip
-                        scing sed ipsum. Lorem ipsum
-                        dolor sit amet adipiscing <br>
-                        sem neque.</p>
+                    <p class="thm-text-dark">
+                        请相信快乐的想法，从没有离开过我们的身旁，<br>
+                        就像网络上虚拟的农场，终会成为现实的天堂。
+                    </p>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2">
                 <div class="footer-widget footer-widget__contact-widget">
-                    <h3 class="footer-widget__title">Contact</h3>
+                    <h3 class="footer-widget__title">联系我们</h3>
                     <ul class="list-unstyled footer-widget__contact">
                         <li>
                             <i class="fa fa-phone-square"></i>
-                            <a href="tel:666-888-0000">666 888 0000</a>
+                            <a href="tel:18360495939">18360495939</a>
                         </li>
                         <li>
                             <i class="fa fa-envelope"></i>
                             <a href="/cdn-cgi/l/email-protection#8be2e5ede4cbe8e4e6fbeae5f2a5e8e4e6"><span
-                                    class="__cf_email__" data-cfemail="620b0c040d22010d0f12030c1b4c010d0f">[email&#160;protected]</span></a>
+                                    class="__cf_email__" data-cfemail="620b0c040d22010d0f12030c1b4c010d0f">1776356421@qq.com</span></a>
                         </li>
                         <li>
                             <i class="fa fa-map-marker-alt"></i>
-                            <a href="#">77 top broklyn street.
-                                New York</a>
+                            <a href="#">福建省厦门市集美大学诚毅学院
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2">
                 <div class="footer-widget footer-widget__links-widget">
-                    <h3 class="footer-widget__title">Links</h3>
+                    <h3 class="footer-widget__title">为你推荐</h3>
                     <ul class="list-unstyled footer-widget__links">
                         <li>
-                            <a href="index.html">Top Sellers</a>
+                            <a href="index.html">热卖榜单</a>
                         </li>
                         <li>
-                            <a href="products.html">Shopping</a>
+                            <a href="products.html">购物</a>
                         </li>
                         <li>
-                            <a href="about.html">About Store</a>
+                            <a href="about.html">关于我们</a>
                         </li>
                         <li>
-                            <a href="contact.html">Contact</a>
+                            <a href="contact.html">反馈</a>
                         </li>
                         <li>
-                            <a href="contact.html">Hedddd</a>
+                            <a href="contact.html">客服</a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2">
                 <div class="footer-widget">
-                    <h3 class="footer-widget__title">Explore</h3>
+                    <h3 class="footer-widget__title">配送方式</h3>
                     <ul class="list-unstyled footer-widget__links">
                         <li>
-                            <a href="products.html">New Products</a>
+                            <a href="products.html">上门自提</a>
                         </li>
                         <li>
-                            <a href="checkout.html">My Account</a>
+                            <a href="checkout.html">211限时达</a>
                         </li>
                         <li>
-                            <a href="contact.html">Support</a>
+                            <a href="contact.html">配送服务查询</a>
                         </li>
                         <li>
-                            <a href="contact.html">FAQs</a>
+                            <a href="contact.html">海外配送</a>
+                        </li>
+                        <li>
+                            <a href="contact.html">配送费收取标准</a>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
                 <div class="footer-widget">
-                    <h3 class="footer-widget__title">Newsletter</h3>
+                    <h3 class="footer-widget__title">售后服务</h3>
                     <form action="#" data-url="YOUR_MAILCHIMP_URL" class="mc-form">
-                        <input type="email" name="EMAIL" id="mc-email" placeholder="Email Address">
-                        <button type="submit">Subscribe</button>
+                        <input type="email" name="EMAIL" id="mc-email" placeholder="退款说明">
+                        <button type="submit">价格保护</button>
+                    </form>
+                    <div class="mc-form__response"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-footer">
+        <div class="container">
+            <hr>
+            <div class="inner-container text-center">
+                <div class="bottom-footer__social">
+                    <a href="#" class="fab fa-twitter"></a>
+                    <a href="#" class="fab fa-facebook-square"></a>
+                    <a href="#" class="fab fa-instagram"></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</footer>
+<footer class="site-footer background-black-2">
+    <img src="static/picture/footer-bg-1-1.png" alt="" class="site-footer__shape-1">
+    <img src="static/picture/footer-bg-1-2.png" alt="" class="site-footer__shape-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-widget footer-widget__about-widget">
+                    <a href="index.html" class="footer-widget__logo">
+                        <img src="static/picture/universe.PNG" alt="" width="250" height="80">
+                    </a>
+                    <p class="thm-text-dark">
+                        请相信快乐的想法，从没有离开过我们的身旁，<br>
+                        就像网络上虚拟的农场，终会成为现实的天堂。
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2">
+                <div class="footer-widget footer-widget__contact-widget">
+                    <h3 class="footer-widget__title">联系我们</h3>
+                    <ul class="list-unstyled footer-widget__contact">
+                        <li>
+                            <i class="fa fa-phone-square"></i>
+                            <a href="tel:18360495939">18360495939</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope"></i>
+                            <a href="/cdn-cgi/l/email-protection#8be2e5ede4cbe8e4e6fbeae5f2a5e8e4e6"><span
+                                    class="__cf_email__" data-cfemail="620b0c040d22010d0f12030c1b4c010d0f">1776356421@qq.com</span></a>
+                        </li>
+                        <li>
+                            <i class="fa fa-map-marker-alt"></i>
+                            <a href="#">福建省厦门市集美大学诚毅学院
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2">
+                <div class="footer-widget footer-widget__links-widget">
+                    <h3 class="footer-widget__title">为你推荐</h3>
+                    <ul class="list-unstyled footer-widget__links">
+                        <li>
+                            <a href="index.html">热卖榜单</a>
+                        </li>
+                        <li>
+                            <a href="products.html">购物</a>
+                        </li>
+                        <li>
+                            <a href="about.html">关于我们</a>
+                        </li>
+                        <li>
+                            <a href="contact.html">反馈</a>
+                        </li>
+                        <li>
+                            <a href="contact.html">客服</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2">
+                <div class="footer-widget">
+                    <h3 class="footer-widget__title">配送方式</h3>
+                    <ul class="list-unstyled footer-widget__links">
+                        <li>
+                            <a href="products.html">上门自提</a>
+                        </li>
+                        <li>
+                            <a href="checkout.html">211限时达</a>
+                        </li>
+                        <li>
+                            <a href="contact.html">配送服务查询</a>
+                        </li>
+                        <li>
+                            <a href="contact.html">海外配送</a>
+                        </li>
+                        <li>
+                            <a href="contact.html">配送费收取标准</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                <div class="footer-widget">
+                    <h3 class="footer-widget__title">售后服务</h3>
+                    <form action="#" data-url="YOUR_MAILCHIMP_URL" class="mc-form">
+                        <input type="email" name="EMAIL" id="mc-email" placeholder="退款说明">
+                        <button type="submit">价格保护</button>
                     </form>
                     <div class="mc-form__response"></div>
                 </div>

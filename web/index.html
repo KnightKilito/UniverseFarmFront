@@ -84,7 +84,7 @@
                         var i;
                         for (i = 0; i < mydata.length; i++) {
                             var str = "";
-                            str = str + '<div class="col-lg-4 col-md-6 filter-item fruits">' +
+                            str = str + '<div class="col-lg-4 col-md-6 filter-item fruits" xmlns="http://www.w3.org/1999/html">' +
                                 '<div class="product-card__two">' +
                                 '<div class="product-card__two-image">' +
                                 ' <span class="product-card__two-sale">sale</span>' +
@@ -92,8 +92,8 @@
                                 '<img src="static/picture/' + mydata[i].soilPhoto + '" alt="">' +
                                 '<div class="product-card__two-image-content">' +
                                 '<a href="#"><i class="organik-icon-visibility"></i></a>' +
-                                '<a href="#"><i class="organik-icon-heart"></i></a>' +
-                                '<a href="#" onclick="add(' + mydata[i].soilId + ')"><i class="organik-icon-shopping-cart"></i></a>' +
+                                '<a><i class="organik-icon-heart"></i></a>' +
+                                '<a onclick="add(' + mydata[i].soilId + ')"> <i class="organik-icon-shopping-cart"></i></a>' +
                                 '</div>' +
                                 '</div>' +
                                 '<div class="product-card__two-content">' +
@@ -225,7 +225,7 @@
                     </a>
                     <div class="mobile-nav__buttons">
                         <a href="#" class="search-toggler"><i class="organik-icon-magnifying-glass"></i></a>
-                        <a href="#" class="mini-cart__toggler"><i class="organik-icon-shopping-cart"></i></a>
+                        <a href="cart.html" class="mini-cart__toggler"><i class="organik-icon-shopping-cart"></i></a>
                     </div>
                     <span class="fa fa-bars mobile-nav__toggler"></span>
                 </div>
@@ -249,7 +249,7 @@
                     </div>
                     <div class="topbar__buttons">
                         <a href="#" class="search-toggler"><i class="organik-icon-magnifying-glass"></i></a>
-                        <a href="#" class="mini-cart__toggler"><i class="organik-icon-shopping-cart"></i></a>
+                        <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
                     </div>
                 </div>
             </div>
@@ -281,17 +281,17 @@
                         <!--<ul>
                             <li><a href="products.html">Shop</a></li>
                             <li><a href="product-details.html">Product Details</a></li>
-                            <li><a href="car.html">Cart Page</a></li>
+                            <li><a href="cart.html">Cart Page</a></li>
                             <li><a href="checkout.html">Checkout</a></li>
                         </ul>-->
                     </li>
-                    <li class="dropdown"><a href="car.html">购物车</a>
+                    <li class="dropdown"><a href="cart.html">购物车</a>
                         <!--<ul>
                             <li><a href="news.html">购物车</a></li>
                             <li><a href="news-details.html">News Details</a></li>
                         </ul>-->
                     </li>
-                    <li><a href="contact.html">个人农场</a></li>
+                    <li><a href="soils.html">个人农场</a></li>
                     <li><a href="contact.html">农场社区</a></li>
                 </ul>
                     <!--<li>
