@@ -91,37 +91,58 @@
     </script>
     <!--自动填充图片信息-->
     <script>
-        //当文档加载完毕时触发
+        //获取cookie来搜索产品详情
+        //当文档加载完成后再执行
         $(document).ready(function () {
-            //加载当前的登录用户
+
+            //var goodId=getCookie("goodId");
+            var soilId=window.localStorage.getItem('soilId');
             $.ajax({
-                url: "http://localhost:8088/UniverseFarmBack/getSoilByUserId.do",
+                url: "http://localhost:8088/UniverseFarmBack/getSoilById.do",
                 dataType: "json",
+                data:{soilid:soilId},
                 type: "get",
-                xhrFields: {                               //保存session在跨域访问中不会丢失！！！
+                xhrFields: {
                     withCredentials: true
                 },
                 crossDomain: true,
                 success: function (result) {
-                    if (result.flag == 0) {
-                        //没有数据
-                        $("#webVR").html("暂无数据");
-                    } else {
-                        //取出数据
-                        var mydata = result.data;
-                            var str = "";
-                            str = '<a-scene>'+
-                            '<a-sky src="http://localhost:8088/UniverseFarmBack/static/picture/soils/lake.jpeg"></a-sky>'+
-                            //'<a-sky src="http://localhost:8088/UniverseFarmBack/static/picture/soils/'+ mydata.soilPhoto+'"></a-sky>'+
-                            '</a-scene>';
-                            $("#webVR").append(str);
+                    if (result.flag == 1) {
+                        //说明找到农场
+                        $("#soil_name").html(result.data.soilName);
+                        $("#soil_price").html("￥"+result.data.soilPrice);
+                        $("#soil_des").html(result.data.soilDes);
+                        $("#soil_status").html(result.data.soilStatus);
+                        $("#soil_maturity").html(result.data.soilMaturity);
+                        $("#soil_fruit").html(result.data.soilFruit);
 
-                    }
+
+                        $("#soil_add").html("<button className='btn btn-default' data-dismiss='modal'>关闭</button>"
+                            +"<button className='btn btn-primary' onClick='addSoil("+soilId+")'>提交</button>");
+
+
+                        var str = "";
+                        str = '<a-scene>'+
+                            '<a-sky src="http://localhost:8088/UniverseFarmBack/static/picture/soils/lake.jpeg"></a-sky>'+
+                            //'<a-sky src="http://localhost:8088/UniverseFarmBack/static/picture/soils/'+ result.data.soilPhoto+'"></a-sky>'+
+                            '</a-scene>';
+                        $("#webVR").append(str);
+                    } else {
+                        //说明未找到农场
+                        $("#soil_name").html("找不到该ID的产品："+soilId);
+                        $("#soil_price").html("￥ NULL");
+                        //此处可以替换为NULL图片
+                        var str = "";
+                        str = '<a-scene>'+
+                            '<a-sky src="http://localhost:8088/UniverseFarmBack/static/picture/soils/NULL.jfif"></a-sky>'+
+                            //'<a-sky src="http://localhost:8088/UniverseFarmBack/static/picture/soils/'+ result.data.soilPhoto+'"></a-sky>'+
+                            '</a-scene>';
+                        $("#webVR").append(str);
                 }
             });
+
+
         });
-
-
     </script>
     <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
 </head>
@@ -208,7 +229,7 @@
                             <li><a href="news-details.html">News Details</a></li>
                         </ul>-->
                     </li>
-                    <li><a href="soils.html">个人农场</a></li>
+                    <li><a href="mysoils.html">个人农场</a></li>
                     <li><a href="contact.html">农场社区</a></li>
                 </ul>
                 <!--<li>
@@ -251,15 +272,38 @@
 </div>
 
 <div style="margin:0 auto">
-
-    <a href="#"><i class="organik-icon-visibility"></i></a>
-    <a href="#"><i class="organik-icon-heart"></i></a>
-    <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
+    <!--此处添加功能按钮-->
+    <a href="#mymodal" data-toggle='modal'><i class="organik-icon-visibility"></i></a>
+    <a href="#" ><i class="organik-icon-heart"></i></a>
+    <a href="cart-soil.html" onclick="soilAdd()"><i class="organik-icon-shopping-cart"></i></a>
 </div>
 <!--此处插入aframe标签-->
 <div id="webVR">
 
 </div>
+<!--此处插入农场介绍框-->
+<div id="mymodal" class="modal fade">
+    <!--相对定位，自适应宽高-->
+    <!--当分辨率大于768px时，宽度为600px-->
+
+    <div class="modal-dialog" style="display: inline-block;left: 300px">
+        <div class="modal-content" style="align-content: center;width: 910px">
+            <div id="_modalDialog_body" class="modal-body">
+                <p id="soil_name"></p>
+                <p id="soil_price"></p>
+                <p id="soil_des"></p>
+                <p id="soil_status"></p>
+                <p id="soil_maturity"></p>
+                <p id="soil_fruit"></p>
+            </div>
+            <div class="modal-footer" id="soil_add">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
 
 <div class="mobile-nav__wrapper">
     <div class="mobile-nav__overlay mobile-nav__toggler"></div>
