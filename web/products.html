@@ -35,7 +35,7 @@
 
   //加载首页的数据
   $(document).ready(function(){
-   mypage(1,8);
+   mypage(1,9);
   });
  </script>
  <script>
@@ -79,7 +79,7 @@
                '<div class="product-card__content">'+
                '<div class="product-card__left">'+
                '<h3><a href="product-details.html">'+mydata[i].soilName+'</a></h3>'+
-               '<p>$'+mydata[i].soilPrice+'1.00</p>'+
+               '<p>$'+mydata[i].soilPrice+'</p>'+
                '</div>'+
                '<div class="product-card__right">'+
                '<i class="fa fa-star"></i>'+
@@ -623,7 +623,7 @@
 <!-- </div>-->
 </div>
 <div class="text-center">
- <a href="javascript:mypage('+(globalpage+1)+','+globalsize+')" class="thm-btn products__load-more" >Load More</a>
+ <a href="javascript:mypage((globalpage+1),+globalsize)" class="thm-btn products__load-more" >Load More</a>
 </div>
 </div>
 </div>
