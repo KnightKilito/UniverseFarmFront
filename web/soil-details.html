@@ -201,6 +201,7 @@
                 crossDomain: true,
                 success: function (result) {
                     alert(result.msg+",当前成熟度为"+result.data);
+                    location.reload();
                 }
             });
         }
