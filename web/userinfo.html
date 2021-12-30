@@ -147,21 +147,24 @@
 <script>
     //此处也可以用.do传后端再跑去新界面，但是为了尝试新方法~
     //设置cookie传递id去产品详情界面
-    var setCookie = function (name, value, day) {
+    /*var setCookie = function (name, value, day) {
         //当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
         //var expires = day * 24 * 60 * 60 * 1000;
         var expires = 0;
         var exp = new Date();
         exp.setTime(exp.getTime() + expires);
         document.cookie = name + "=" + value + ";expires=" + exp.toUTCString();
-    };
+    };*/
     //传递cookie
     function seeGoodDetail(goodId){
         /*var name = document.getElementById("userName");
         var pass = document.getElementById("passwords");*/
         /*setCookie('userName',name.value,7)*/
-        setCookie('goodId',goodId.value,0);
+        //setCookie('goodId',goodId.value,0);
         location.href = 'product-details.html';
+        //设置localStorage，只能同域名同端口传值
+        window.localStorage.setItem('goodId',goodId);
+
     }
     //删除cookie
     var delCookie = function (name) {
@@ -455,7 +458,7 @@
                             <li><a href="news-details.html">News Details</a></li>
                         </ul>-->
                     </li>
-                    <li><a href="contact.html">个人农场</a></li>
+                    <li><a href="soils.html">个人农场</a></li>
                     <li><a href="contact.html">农场社区</a></li>
                 </ul>
                 <!--<li>
