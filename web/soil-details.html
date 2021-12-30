@@ -97,6 +97,7 @@
 
             //var goodId=getCookie("goodId");
             var soilId=window.localStorage.getItem('soilId');
+            var flag=window.localStorage.getItem('flag');
             $.ajax({
                 url: "http://localhost:8088/UniverseFarmBack/getSoilById.do",
                 dataType: "json",
@@ -115,17 +116,43 @@
                         $("#soil_status").html("农场状态："+result.data.soilStatus);
                         $("#soil_maturity").html("农场作物成熟度："+result.data.soilMaturity);
                         $("#soil_fruit").html("农场作物类型："+result.data.soilFruit);
-
-
                         $("#soil_add").html("<button className='btn btn-default' data-dismiss='modal'>关闭</button>"
                             +"<button className='btn btn-primary' onClick='addSoil("+soilId+")'>加购</button>");
 
+                        if(flag==1){
+                            //填充浇水等自己农场才能用的按钮
+
+                            /*$("fucs").html("<a href='cart-soil.html' onClick='soilAdd()'><i className='organik-icon-shopping-cart'></i></a>"
+                                +""
+                                +""
+                            );*/
+
+                        }else{
+                            //填充购买、偷能量等路人才能用的按钮
+
+                            $("fucs").html("<a href='cart-soil.html' onClick='soilAdd()'><i className='organik-icon-shopping-cart'></i></a>"
+                            +""
+                            +""
+                            );
+
+
+
+                        }
+
 
                         var str = "";
-                        str = '<a-scene>'+
-                            '<a-sky src="http://localhost:8088/UniverseFarmBack/static/picture/soils/lake.jpeg"></a-sky>'+
-                            //'<a-sky src="http://localhost:8088/UniverseFarmBack/static/picture/soils/'+ result.data.soilPhoto+'"></a-sky>'+
-                            '</a-scene>';
+                        if(result.data.soilPhoto==null){
+                            str = '<a-scene>'+
+                                '<a-sky src="http://localhost:8088/UniverseFarmBack/static/picture/soils/NULL.jfif"></a-sky>'+
+                                //'<a-sky src="http://localhost:8088/UniverseFarmBack/static/picture/soils/'+ result.data.soilPhoto+'"></a-sky>'+
+                                '</a-scene>';
+                        }else{
+                            str = '<a-scene>'+
+                                //'<a-sky src="http://localhost:8088/UniverseFarmBack/static/picture/soils/lake.jpeg"></a-sky>'+
+                                '<a-sky src="http://localhost:8088/UniverseFarmBack/static/picture/soils/'+ result.data.soilPhoto+'"></a-sky>'+
+                                '</a-scene>';
+                        }
+
                         $("#webVR").append(str);
                     } else {
                         //说明未找到农场
@@ -290,11 +317,11 @@
 
 </div>
 
-<div style="margin:0 auto">
+<div style="margin:0 auto" id="fucs">
     <!--此处添加功能按钮-->
     <a href="#mymodal" data-toggle='modal'><i class="organik-icon-visibility"></i></a>
     <a onclick="irrigate()" ><i class="fa fa-tree" aria-hidden="true"></i></a>
-    <a href="cart-soil.html" onclick="soilAdd()"><i class="organik-icon-shopping-cart"></i></a>
+
 </div>
 <!--此处插入aframe标签-->
 <div id="webVR">

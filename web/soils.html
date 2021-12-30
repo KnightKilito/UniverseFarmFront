@@ -165,6 +165,9 @@
             location.href = 'soil-details.html';
             //设置localStorage，只能同域名同端口传值
             window.localStorage.setItem('soilId',soilId);
+            //状态为1表示从个人农场过去，可以进行浇水等操作，为0则只能偷取和购买
+            var flag=0;
+            window.localStorage.setItem('flag',flag);
         }
     </script>
 </head>
