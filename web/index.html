@@ -163,6 +163,98 @@
 
             });
 
+        });
+        $(document).ready(function () {
+            $.ajax({
+                url: "http://localhost:8088/UniverseFarmBack/getSoils.do",
+                dataType: "json",
+                type: "get",
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success: function (result) {
+                    // globalpage=result.data.page;
+                    // globalsize=result.data.size;
+                    // globalpageCount=result.data.pageCount;
+                    if (result.flag == 0) {
+                        //没有数据
+                        $("#soillist").html("暂无数据");
+                    } else {
+                        //取出数据
+                        var mydata = result.data;
+                        var myuser = result.usermsg;
+                        var i;
+                        for (i = 0; i < mydata.length; i++) {
+                            var str = "";
+                            str = str + '<div class="col-lg-4 col-md-6 filter-item dairy" xmlns="http://www.w3.org/1999/html">' +
+                                '<div class="product-card__two">' +
+                                '<div class="product-card__two-image">' +
+                                ' <span class="product-card__two-sale">sale</span>' +
+                                '<input id="myuserID" type="hidden" value="' + mydata[i].soilID + '" />' +
+                                '<img src="static/picture/' + mydata[i].soilPhoto + '" alt="">' +
+                                '<div class="product-card__two-image-content">' +
+                                // '<a href="#"><i class="organik-icon-visibility"></i></a>' +
+                                '<a href="product-details.html"><i class="organik-icon-visibility"></i></a>' +
+                                '<a onclick="add(' + mydata[i].soilId + ')"> <i class="organik-icon-shopping-cart"></i></a>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="product-card__two-content">' +
+                                '<h3><a href="product-details.html">' + mydata[i].soilName + '</a></h3>' +
+                                '<div class="product-card__two-stars">' +
+                                // '<i class="fa fa-star"></i>' +
+                                // '<i class="fa fa-star"></i>' +
+                                // '<i class="fa fa-star"></i>' +
+                                // '<i class="fa fa-star"></i>' +
+                                // '<i class="fa fa-star"></i>' +
+                                myuser[i].userName+
+                                '</div>' +
+                                '<p>￥' + mydata[i].soilPrice + '</p>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>';
+                            $("#soillist").append(str);
+                        }
+
+
+                        // var str2='<a href="javascript:mypage(1,'+globalsize+')">首页</a>';
+                        // var str3= '<a href="javascript:mypage('+(globalpage-1)+','+globalsize+')">&lt;上一页</a>';
+                        // var strpage="";
+                        // for(i=1;i<=globalpageCount;i++){
+                        //  if(i==globalpage){
+                        //   strpage=strpage+'<a href="javascript:mypage('+i+','+globalsize+')" class="on">'+i+'</a>';
+                        //  }else{
+                        //   strpage=strpage+'<a href="javascript:mypage('+i+','+globalsize+')" >'+i+'</a>';
+                        //  }
+                        //
+                        // }
+
+//						  <a href="#" class="on">1</a>
+//						  <a href="#">2</a>
+//						  <a href="#">3</a>
+//						  <a href="#">4</a>
+//       var str4='<a href="javascript:mypage('+(globalpage+1)+','+globalsize+')">下一页&gt;</a>';
+//       var str5='<a href="javascript:mypage('+globalpageCount+','+globalsize+')">尾页</a>';
+//
+//       $("#mypagetool").html(str2+str3+strpage+str4+str5);
+//
+//
+//       var selectstr="";
+//       for(i=1;i<=globalpageCount;i++){
+//        if(i==globalpage){
+//         selectstr=selectstr+"<option selected='selected' value='"+i+"'>"+i+"</option>"
+//        }else{
+//         selectstr=selectstr+"<option value='"+i+"'>"+i+"</option>"
+//        }
+//       }
+//       $("#myselect").html(selectstr);
+                    }
+
+
+                },
+
+            });
+
         })
     </script>
     <script>
@@ -207,6 +299,7 @@
 
         }
     </script>
+
 </head>
 <body>
 <div class="preloader">
@@ -223,7 +316,8 @@
                         <img src="static/picture/universe.PNG" width="300" alt="">
                     </a>
                     <div class="mobile-nav__buttons">
-                        <a href="#" class="search-toggler"><i class="organik-icon-magnifying-glass"></i></a>
+<!--                        <i class="fa fa-camera-retro"></i> fa-camera-retro-->
+                        <a href="#" class="search-toggler"><i class="fa fa-address-card" aria-hidden="true"></i></a>
                         <a href="cart.html" class="mini-cart__toggler"><i class="organik-icon-shopping-cart"></i></a>
                     </div>
                     <span class="fa fa-bars mobile-nav__toggler"></span>
@@ -247,7 +341,7 @@
                         <p>Phone <a href="tel:+92-666-888-0000">92 666 888 0000</a></p>
                     </div>
                     <div class="topbar__buttons">
-                        <a href="#" class="search-toggler"><i class="organik-icon-magnifying-glass"></i></a>
+                        <a href="#" class="search-toggler"><i class="fa fa-address-card" aria-hidden="true"></i></a>
                         <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
                     </div>
                 </div>
