@@ -116,10 +116,14 @@
                     {
                         alert(result.msg+"\n您的"+mydata.soilName+"已经获取5点成熟度"+目前成熟度为+mydata.soilMaturity);
                     }
-                    else
+                    else if(result.flag==2)
                     {
                         alert(result.msg);
                         location.href("login.html");
+                    }
+                    else
+                    {
+                        alert(result.msg)
                     }
                 }
             });
