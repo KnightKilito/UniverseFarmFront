@@ -109,16 +109,16 @@
                 success: function (result) {
                     if (result.flag == 1) {
                         //说明找到农场
-                        $("#soil_name").html(result.data.soilName);
-                        $("#soil_price").html("￥"+result.data.soilPrice);
-                        $("#soil_des").html(result.data.soilDes);
-                        $("#soil_status").html(result.data.soilStatus);
-                        $("#soil_maturity").html(result.data.soilMaturity);
-                        $("#soil_fruit").html(result.data.soilFruit);
+                        $("#soil_name").html("农场名："+result.data.soilName);
+                        $("#soil_price").html("农场价格："+"￥"+result.data.soilPrice);
+                        $("#soil_des").html("农场介绍："+result.data.soilDes);
+                        $("#soil_status").html("农场状态："+result.data.soilStatus);
+                        $("#soil_maturity").html("农场作物成熟度："+result.data.soilMaturity);
+                        $("#soil_fruit").html("农场作物类型："+result.data.soilFruit);
 
 
                         $("#soil_add").html("<button className='btn btn-default' data-dismiss='modal'>关闭</button>"
-                            +"<button className='btn btn-primary' onClick='addSoil("+soilId+")'>提交</button>");
+                            +"<button className='btn btn-primary' onClick='addSoil("+soilId+")'>加购</button>");
 
 
                         var str = "";
@@ -139,10 +139,9 @@
                             '</a-scene>';
                         $("#webVR").append(str);
                 }
+                }
             });
-
-
-        });
+        })
     </script>
     <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
 </head>
@@ -230,7 +229,7 @@
                         </ul>-->
                     </li>
                     <li><a href="mysoils.html">个人农场</a></li>
-                    <li><a href="contact.html">农场社区</a></li>
+                    <li><a href="soils.html">农场社区</a></li>
                 </ul>
                 <!--<li>
                 <a href="about.html">About</a>
@@ -250,7 +249,7 @@
                         <li><a href="news-details.html">News Details</a></li>
                     </ul>
                 </li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="soils.html">Contact</a></li>
             </ul>-->
                 <div class="main-menu__language">
                     <img src="static/picture/flag-1-0.jpg" alt="">
