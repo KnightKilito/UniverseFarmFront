@@ -96,6 +96,36 @@
         });
     </script>
     <script>
+        function steal(soilId){
+            $.ajax({
+                url: "http://localhost:8088/UniverseFarmBack/steal.do",
+                dataType: "json",
+                data: {soilId: soilId},
+                type: "get",
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success: function (result) {
+                    var mydata=result.data;
+                    if(result.flag==0)
+                    {
+                        alert(result.msg);
+                    }
+                    else if(result.flag==1)
+                    {
+                        alert(result.msg+"\n您的"+mydata.soilName+"已经获取5点成熟度"+目前成熟度为+mydata.soilMaturity);
+                    }
+                    else
+                    {
+                        alert(result.msg);
+                        location.href("login.html");
+                    }
+                }
+            });
+        }
+    </script>
+    <script>
         /**
          * 分页函数
          * @param page   当前页数
@@ -130,7 +160,7 @@
                                 '<img src="http://localhost:8088/UniverseFarmBack/static/picture/soils/' + mydata[i].soilPhoto + '">' +
                                 '<div class="product-card__image-content">' +
                                 '<a href="#" onclick="seeSoilDetail('+mydata[i].soilId+')"><i class="organik-icon-visibility"></i></a>'+
-                                '<a href="cart.html" onclick="add('+mydata[i].soilId+')"><i class="organik-icon-shopping-cart"></i></a>' +
+                                '<a onclick="steal('+mydata[i].soilId+')"><i class="fa fa-thumbs-down" aria-hidden="true"></i></a>' +
                                 '</div>' +
                                 '</div>' +
                                 '<div class="product-card__content">' +
