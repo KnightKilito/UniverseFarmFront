@@ -116,21 +116,35 @@
                         $("#soil_status").html("农场状态："+result.data.soilStatus);
                         $("#soil_maturity").html("农场作物成熟度："+result.data.soilMaturity);
                         $("#soil_fruit").html("农场作物类型："+result.data.soilFruit);
-                        $("#soil_add").html("<button className='btn btn-default' data-dismiss='modal'>关闭</button>"
-                            +"<button className='btn btn-primary' onClick='addSoil("+soilId+")'>加购</button>");
+                        $("#soil_foot").html("<button className='btn btn-default' data-dismiss='modal'>关闭</button>");
+                            //+"<button className='btn btn-primary' onClick='addSoil("+soilId+")'>加购</button>");
+                        // 读取并且设置农场作物成熟度
+                        var input = document.getElementById("good_maturity");
+                        input.setAttribute("value", result.data.soilMaturity);
+                        // 读取并设置农场作物类型
+                        input = document.getElementById("good_fruit");
+                        input.setAttribute("value", result.data.soilFruit);
+
+                        $("#good_foot").html("<button className='btn btn-default' data-dismiss='modal'>关闭</button>"
+                        +"<button className='btn btn-primary' onClick='harvest("+soilId+")'>加购</button>");
+
+
+
 
                         if(flag==1){
                             //填充浇水等自己农场才能用的按钮
 
-                            $("#fucs").html("<a onClick='irrigate()'><i class='fa fa-tree' aria-hidden='true'></i></a>"
-                                +""
+                            $("#fucs").html(
+                                "<a href='#mymodal' data-toggle='modal'><i class='organik-icon-visibility'></i></a>"
+                                +"<a onClick='irrigate()'><i class='fa fa-tree' aria-hidden='true'></i></a>"
+                                +"<a href='#mymodal2' ><i class='fa fa-truck' aria-hidden='true'></i></a>"
                                 +""
                             );
 
                         }else{
                             //填充购买、偷能量等路人才能用的按钮
 
-                            $("#fucs").html("<a onClick='soilAdd()'><i className='organik-icon-shopping-cart'></i></a>"
+                            $("#fucs").html("<a onClick='add("+soilId+")'><i className='organik-icon-shopping-cart'></i></a>"
                             +""
                             +""
                             );
@@ -191,6 +205,54 @@
             });
         }
     </script>
+    <script>
+        var soilId=window.localStorage.getItem('soilId');
+        function harvest()
+        {
+            var addGoodName = $("#addGoodName").val();
+            var addGoodDes = $("#addGoodDes").val();
+            var addGoodPrice = $("#addGoodPrice").val();
+            var addGoodPhoto = $("#addGoodPhoto").val();
+            var addGoodStatus = $("#addGoodStatus").val();
+            var addGoodMaturity = $("#addGoodMaturity").val();
+            var addGoodFruit = $("#addGoodFruit").val();
+            $.ajax({
+                url: "http://localhost:8088/UniverseFarmBack/harvest.do",
+                dataType: "json",
+                data:{soilid:soilId},
+                type: "get",
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success: function (result) {
+                    alert(result.msg+",当前成熟度为"+result.data);
+                }
+            });
+        }
+    </script>
+    <script>
+        function add(soilId) {
+            $.ajax({
+                url: "http://localhost:8088/UniverseFarmBack/addCart.do",
+                dataType: "json",
+                data: {soilinfoid: soilId},
+                type: "get",
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success: function (result) {
+                    alert(result.msg);
+                    //跳转到登录页面？刷新页面
+                    // location.reload();
+                }
+            });
+
+
+        }
+    </script>
+
 </head>
 <body>
 <div class="preloader">
@@ -319,7 +381,7 @@
 
 <div style="margin:0 auto" id="fucs">
     <!--此处添加功能按钮-->
-    <a href="#mymodal" data-toggle='modal'><i class="organik-icon-visibility"></i></a>
+
 <!--    <a onclick="irrigate()" ><i class="fa fa-tree" aria-hidden="true"></i></a>-->
 
 </div>
@@ -342,15 +404,59 @@
                 <p id="soil_maturity"></p>
                 <p id="soil_fruit"></p>
             </div>
-            <div class="modal-footer" id="soil_add">
+            <div class="modal-footer" id="soil_foot">
 
             </div>
 
         </div>
     </div>
 </div>
+<!--此处为收获模态框-->
+<div id="mymodal2" class="modal fade">
+    <!--相对定位，自适应宽高-->
+    <!--当分辨率大于768px时，宽度为600px-->
 
+    <div class="modal-dialog" style="display: inline-block;left: 300px">
+        <div class="modal-content" style="align-content: center;width: 910px">
+            <div  class="modal-body">
+                <p id="good_name">
+                商品名：<input type="email" name="EMAIL" id="addGoodName" value=""
+                              placeholder="good_name">
+                </p>
+                <p id="good_price">
+                    商品价格：<input type="email" name="EMAIL" id="addGoodPrice" value=""
+                               placeholder="good_price">
+                </p>
+                <p id="good_des">
+                    商品描述：<input type="email" name="EMAIL" id="addGoodDes" value=""
+                               placeholder="good_des">
+                </p>
+                <p id="good_photo">
+                    商品描述：<input type="email" name="EMAIL" id="addGoodPhoto" value=""
+                                placeholder="good_photo">
+                </p>
+                <p id="good_status">
+                    <!--商品状态，默认0-->
+                    <input type="email" name="EMAIL" id="addGoodStatus" value="0"
+                               placeholder="good_status" disabled="true" hidden="true">
+                </p>
+                <p id="good_maturity">
+                    作物成熟度：
+                    <input type="email" name="EMAIL" id="addGoodMaturity" value="0"
+                               placeholder="good_maturity" disabled="true" >
+                </p>
+                <p id="good_fruit">
+                    商品类型：<input type="email" name="EMAIL" id="addGoodFruit" value=""
+                               placeholder="good_fruit" disabled="true">
+                </p>
+            </div>
+            <div class="modal-footer" id="good_foot">
+                    <!--此处填充模态框底部按钮-->
+            </div>
 
+        </div>
+    </div>
+</div>
 <div class="mobile-nav__wrapper">
     <div class="mobile-nav__overlay mobile-nav__toggler"></div>
 
