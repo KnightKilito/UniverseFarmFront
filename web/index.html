@@ -61,6 +61,110 @@
             });
 
         });
+        $(document).ready(function () {
+            $.ajax({
+                url: "http://localhost:8088/UniverseFarmBack/getSixSoil.do",
+                dataType: "json",
+                type: "get",
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success: function (result) {
+                    // globalpage=result.data.page;
+                    // globalsize=result.data.size;
+                    // globalpageCount=result.data.pageCount;
+                    if (result.flag == 0) {
+                        //没有数据
+                        $("#soillist").html("暂无数据");
+                    } else {
+                        //取出数据
+                        var mydata = result.data;
+                        var myuser = result.usermsg;
+                        var i;
+                        for (i = 0; i < mydata.length; i++) {
+                            var str = "";
+                            str = str + '<div class="col-lg-4 col-md-6 filter-item fruits">' +
+                                '<div class="product-card__two">' +
+                                '<div class="product-card__two-image">' +
+                                ' <span class="product-card__two-sale">sale</span>' +
+                                '<input id="myuserID" type="hidden" value="' + mydata[i].soilID + '" />' +
+                                '<img src="static/picture/' + mydata[i].soilPhoto + '" alt="">' +
+                                '<div class="product-card__two-image-content">' +
+                                '<a href="#"><i class="organik-icon-visibility"></i></a>' +
+                                '<a href="#"><i class="organik-icon-heart"></i></a>' +
+                                '<a href="#" onclick="add(' + mydata[i].soilId + ')"><i class="organik-icon-shopping-cart"></i></a>' +
+                                '</div>' +
+                                '</div>' +
+                                '<div class="product-card__two-content">' +
+                                '<h3><a href="product-details.html">' + mydata[i].soilName + '  From  ' + myuser[i].userName + '</a></h3>' +
+                                '<div class="product-card__two-stars">' +
+                                '<i class="fa fa-star"></i>' +
+                                '<i class="fa fa-star"></i>' +
+                                '<i class="fa fa-star"></i>' +
+                                '<i class="fa fa-star"></i>' +
+                                '<i class="fa fa-star"></i>' +
+                                '</div>' +
+                                '<p>￥' + mydata[i].soilPrice + '</p>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>';
+                            $("#soillist").append(str);
+                            // str=str+'<li class="gl-item"> <em class="icon_special tejia"></em> <div class="Borders">'+
+                            //         '<div class="img"><a href="goodsinfo.html?goods_id='+mydata[i].goods_id+'"><img src="products/p_1.jpg" style="width:220px;height:220px">'+
+                            //         '</a></div> <div class="Price"><b>¥'+mydata[i].goods_price+'</b>';
+
+                            // if(mydata[i].goods_type=="生鲜")	{
+                            //  str=str+'<span>[¥'+mydata[i].goods_price+'/500g]</span>';
+                            // }else{
+                            //  str=str+'<span>[¥'+mydata[i].goods_price+'/件]</span>';
+                            // }
+                            // str=str+'</div><div class="name"><a href="goodsinfo.html?goods_id='+mydata[i].goods_id+'">'+mydata[i].goods_name+'</a></div>'+
+                            //         '<div class="Shop_name"><a href="#">'+mydata[i].goods_company+'</a></div>'+
+                            //         ' <div class="p-operate"> <a href="#" class="p-o-btn Collect"><em></em>收藏</a>'+
+                            //         '<a href="#" class="p-o-btn shop_cart"><em></em>联系我们</a> </div> </div> </li>';
+                        }
+
+
+                        // var str2='<a href="javascript:mypage(1,'+globalsize+')">首页</a>';
+                        // var str3= '<a href="javascript:mypage('+(globalpage-1)+','+globalsize+')">&lt;上一页</a>';
+                        // var strpage="";
+                        // for(i=1;i<=globalpageCount;i++){
+                        //  if(i==globalpage){
+                        //   strpage=strpage+'<a href="javascript:mypage('+i+','+globalsize+')" class="on">'+i+'</a>';
+                        //  }else{
+                        //   strpage=strpage+'<a href="javascript:mypage('+i+','+globalsize+')" >'+i+'</a>';
+                        //  }
+                        //
+                        // }
+
+//						  <a href="#" class="on">1</a>
+//						  <a href="#">2</a>
+//						  <a href="#">3</a>
+//						  <a href="#">4</a>
+//       var str4='<a href="javascript:mypage('+(globalpage+1)+','+globalsize+')">下一页&gt;</a>';
+//       var str5='<a href="javascript:mypage('+globalpageCount+','+globalsize+')">尾页</a>';
+//
+//       $("#mypagetool").html(str2+str3+strpage+str4+str5);
+//
+//
+//       var selectstr="";
+//       for(i=1;i<=globalpageCount;i++){
+//        if(i==globalpage){
+//         selectstr=selectstr+"<option selected='selected' value='"+i+"'>"+i+"</option>"
+//        }else{
+//         selectstr=selectstr+"<option value='"+i+"'>"+i+"</option>"
+//        }
+//       }
+//       $("#myselect").html(selectstr);
+                    }
+
+
+                },
+
+            });
+
+        })
     </script>
     <script>
         function loginout() {
@@ -76,6 +180,28 @@
                     alert(result.msg);
                     //跳转到登录页面？刷新页面
                     location.reload();
+                }
+            });
+
+
+        }
+    </script>
+    <!-- //加入购物车-->
+    <script>
+        function add(myuserID) {
+            $.ajax({
+                url: "http://localhost:8088/UniverseFarmBack/addCart.do",
+                dataType: "json",
+                data: {soilinfoid: myuserID},
+                type: "get",
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success: function (result) {
+                    alert(result.msg);
+                    //跳转到登录页面？刷新页面
+                    // location.reload();
                 }
             });
 
@@ -339,222 +465,222 @@
                     </li>
                 </ul>
             </div>
-            <div class="row filter-layout">
-                <div class="col-lg-4 col-md-6 filter-item fruits">
-                    <div class="product-card__two">
-                        <div class="product-card__two-image">
-                            <span class="product-card__two-sale">sale</span>
-                            <img src="static/picture/苹果果.png" alt="">
-                            <div class="product-card__two-image-content">
-                                <a href="#"><i class="organik-icon-visibility"></i></a>
-                                <a href="#"><i class="organik-icon-heart"></i></a>
-                                <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-card__two-content">
-                            <h3><a href="product-details.html">苹果</a></h3>
-                            <div class="product-card__two-stars">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <p>￥1.00</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="row filter-layout" id="soillist">
+<!--                <div class="col-lg-4 col-md-6 filter-item fruits">-->
+<!--                    <div class="product-card__two">-->
+<!--                        <div class="product-card__two-image">-->
+<!--                            <span class="product-card__two-sale">sale</span>-->
+<!--                            <img src="static/picture/苹果果.png" alt="">-->
+<!--                            <div class="product-card__two-image-content">-->
+<!--                                <a href="#"><i class="organik-icon-visibility"></i></a>-->
+<!--                                <a href="#"><i class="organik-icon-heart"></i></a>-->
+<!--                                <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="product-card__two-content">-->
+<!--                            <h3><a href="product-details.html">苹果</a></h3>-->
+<!--                            <div class="product-card__two-stars">-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                            </div>-->
+<!--                            <p>￥1.00</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <div class="col-lg-4 col-md-6 filter-item fruits">
-                    <div class="product-card__two">
-                        <div class="product-card__two-image">
-                            <img src="static/picture/柚子果.png" alt="" height="236">
-                            <div class="product-card__two-image-content">
-                                <a href="#"><i class="organik-icon-visibility"></i></a>
-                                <a href="#"><i class="organik-icon-heart"></i></a>
-                                <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-card__two-content">
-                            <h3><a href="product-details.html">橙子</a></h3>
-                            <div class="product-card__two-stars">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <p>￥3.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 filter-item pantry">
-                    <div class="product-card__two">
-                        <div class="product-card__two-image">
-                            <img src="static/picture/苹果苗.png" alt="" height="236">
-                            <div class="product-card__two-image-content">
-                                <a href="#"><i class="organik-icon-visibility"></i></a>
-                                <a href="#"><i class="organik-icon-heart"></i></a>
-                                <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-card__two-content">
-                            <h3><a href="product-details.html">苹果树苗</a></h3>
-                            <div class="product-card__two-stars">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <p>￥1.00</p>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="col-lg-4 col-md-6 filter-item fruits">-->
+<!--                    <div class="product-card__two">-->
+<!--                        <div class="product-card__two-image">-->
+<!--                            <img src="static/picture/柚子果.png" alt="" height="236">-->
+<!--                            <div class="product-card__two-image-content">-->
+<!--                                <a href="#"><i class="organik-icon-visibility"></i></a>-->
+<!--                                <a href="#"><i class="organik-icon-heart"></i></a>-->
+<!--                                <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="product-card__two-content">-->
+<!--                            <h3><a href="product-details.html">橙子</a></h3>-->
+<!--                            <div class="product-card__two-stars">-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                            </div>-->
+<!--                            <p>￥3.00</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-lg-4 col-md-6 filter-item pantry">-->
+<!--                    <div class="product-card__two">-->
+<!--                        <div class="product-card__two-image">-->
+<!--                            <img src="static/picture/苹果苗.png" alt="" height="236">-->
+<!--                            <div class="product-card__two-image-content">-->
+<!--                                <a href="#"><i class="organik-icon-visibility"></i></a>-->
+<!--                                <a href="#"><i class="organik-icon-heart"></i></a>-->
+<!--                                <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="product-card__two-content">-->
+<!--                            <h3><a href="product-details.html">苹果树苗</a></h3>-->
+<!--                            <div class="product-card__two-stars">-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                            </div>-->
+<!--                            <p>￥1.00</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <div class="col-lg-4 col-md-6 filter-item dairy">
-                    <div class="product-card__two">
-                        <div class="product-card__two-image">
-                            <img src="static/picture/土地b.png" alt="" height="236">
-                            <div class="product-card__two-image-content">
-                                <a href="#"><i class="organik-icon-visibility"></i></a>
-                                <a href="#"><i class="organik-icon-heart"></i></a>
-                                <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-card__two-content">
-                            <h3><a href="product-details.html">雪地</a></h3>
-                            <div class="product-card__two-stars">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <p>$2.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 filter-item dairy">
-                    <div class="product-card__two">
-                        <div class="product-card__two-image">
-                            <img src="static/picture/土地c.png" alt="" height="236">
-                            <div class="product-card__two-image-content">
-                                <a href="#"><i class="organik-icon-visibility"></i></a>
-                                <a href="#"><i class="organik-icon-heart"></i></a>
-                                <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-card__two-content">
-                            <h3><a href="product-details.html">绿地</a></h3>
-                            <div class="product-card__two-stars">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <p>$2.00</p>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="col-lg-4 col-md-6 filter-item dairy">-->
+<!--                    <div class="product-card__two">-->
+<!--                        <div class="product-card__two-image">-->
+<!--                            <img src="static/picture/土地b.png" alt="" height="236">-->
+<!--                            <div class="product-card__two-image-content">-->
+<!--                                <a href="#"><i class="organik-icon-visibility"></i></a>-->
+<!--                                <a href="#"><i class="organik-icon-heart"></i></a>-->
+<!--                                <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="product-card__two-content">-->
+<!--                            <h3><a href="product-details.html">雪地</a></h3>-->
+<!--                            <div class="product-card__two-stars">-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                            </div>-->
+<!--                            <p>$2.00</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-lg-4 col-md-6 filter-item dairy">-->
+<!--                    <div class="product-card__two">-->
+<!--                        <div class="product-card__two-image">-->
+<!--                            <img src="static/picture/土地c.png" alt="" height="236">-->
+<!--                            <div class="product-card__two-image-content">-->
+<!--                                <a href="#"><i class="organik-icon-visibility"></i></a>-->
+<!--                                <a href="#"><i class="organik-icon-heart"></i></a>-->
+<!--                                <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="product-card__two-content">-->
+<!--                            <h3><a href="product-details.html">绿地</a></h3>-->
+<!--                            <div class="product-card__two-stars">-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                            </div>-->
+<!--                            <p>$2.00</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
 
-                <div class="col-lg-4 col-md-6 filter-item dairy">
-                    <div class="product-card__two">
-                        <div class="product-card__two-image">
-                            <img src="static/picture/土地e.png" alt="" height="236">
-                            <div class="product-card__two-image-content">
-                                <a href="#"><i class="organik-icon-visibility"></i></a>
-                                <a href="#"><i class="organik-icon-heart"></i></a>
-                                <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-card__two-content">
-                            <h3><a href="product-details.html">石地</a></h3>
-                            <div class="product-card__two-stars">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <p>$2.00</p>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="col-lg-4 col-md-6 filter-item dairy">-->
+<!--                    <div class="product-card__two">-->
+<!--                        <div class="product-card__two-image">-->
+<!--                            <img src="static/picture/土地e.png" alt="" height="236">-->
+<!--                            <div class="product-card__two-image-content">-->
+<!--                                <a href="#"><i class="organik-icon-visibility"></i></a>-->
+<!--                                <a href="#"><i class="organik-icon-heart"></i></a>-->
+<!--                                <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="product-card__two-content">-->
+<!--                            <h3><a href="product-details.html">石地</a></h3>-->
+<!--                            <div class="product-card__two-stars">-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                            </div>-->
+<!--                            <p>$2.00</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <div class="col-lg-4 col-md-6 filter-item dairy">
-                    <div class="product-card__two">
-                        <div class="product-card__two-image">
-                            <img src="static/picture/tu1.png" alt="" height="236">
-                            <div class="product-card__two-image-content">
-                                <a href="#"><i class="organik-icon-visibility"></i></a>
-                                <a href="#"><i class="organik-icon-heart"></i></a>
-                                <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-card__two-content">
-                            <h3><a href="product-details.html">高地</a></h3>
-                            <div class="product-card__two-stars">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <p>$2.00</p>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="col-lg-4 col-md-6 filter-item dairy">-->
+<!--                    <div class="product-card__two">-->
+<!--                        <div class="product-card__two-image">-->
+<!--                            <img src="static/picture/tu1.png" alt="" height="236">-->
+<!--                            <div class="product-card__two-image-content">-->
+<!--                                <a href="#"><i class="organik-icon-visibility"></i></a>-->
+<!--                                <a href="#"><i class="organik-icon-heart"></i></a>-->
+<!--                                <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="product-card__two-content">-->
+<!--                            <h3><a href="product-details.html">高地</a></h3>-->
+<!--                            <div class="product-card__two-stars">-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                            </div>-->
+<!--                            <p>$2.00</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
-                <div class="col-lg-4 col-md-6 filter-item veg">
-                    <div class="product-card__two">
-                        <div class="product-card__two-image">
-                            <img src="static/picture/保护罩.png" alt="" height="236">
-                            <div class="product-card__two-image-content">
-                                <a href="#"><i class="organik-icon-visibility"></i></a>
-                                <a href="#"><i class="organik-icon-heart"></i></a>
-                                <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-card__two-content">
-                            <h3><a href="product-details.html">保护罩</a></h3>
-                            <div class="product-card__two-stars">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <p>$2.00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 filter-item pantry">
-                    <div class="product-card__two">
-                        <div class="product-card__two-image">
-                            <span class="product-card__two-sale">sale</span>
-                            <img src="static/picture/猕猴桃苗.png" alt="" height="236">
-                            <div class="product-card__two-image-content">
-                                <a href="#"><i class="organik-icon-visibility"></i></a>
-                                <a href="#"><i class="organik-icon-heart"></i></a>
-                                <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                        <div class="product-card__two-content">
-                            <h3><a href="product-details.html">猕猴桃树苗</a></h3>
-                            <div class="product-card__two-stars">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <p>￥2.00</p>
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="col-lg-4 col-md-6 filter-item veg">-->
+<!--                    <div class="product-card__two">-->
+<!--                        <div class="product-card__two-image">-->
+<!--                            <img src="static/picture/保护罩.png" alt="" height="236">-->
+<!--                            <div class="product-card__two-image-content">-->
+<!--                                <a href="#"><i class="organik-icon-visibility"></i></a>-->
+<!--                                <a href="#"><i class="organik-icon-heart"></i></a>-->
+<!--                                <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="product-card__two-content">-->
+<!--                            <h3><a href="product-details.html">保护罩</a></h3>-->
+<!--                            <div class="product-card__two-stars">-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                            </div>-->
+<!--                            <p>$2.00</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-lg-4 col-md-6 filter-item pantry">-->
+<!--                    <div class="product-card__two">-->
+<!--                        <div class="product-card__two-image">-->
+<!--                            <span class="product-card__two-sale">sale</span>-->
+<!--                            <img src="static/picture/猕猴桃苗.png" alt="" height="236">-->
+<!--                            <div class="product-card__two-image-content">-->
+<!--                                <a href="#"><i class="organik-icon-visibility"></i></a>-->
+<!--                                <a href="#"><i class="organik-icon-heart"></i></a>-->
+<!--                                <a href="cart.html"><i class="organik-icon-shopping-cart"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="product-card__two-content">-->
+<!--                            <h3><a href="product-details.html">猕猴桃树苗</a></h3>-->
+<!--                            <div class="product-card__two-stars">-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                                <i class="fa fa-star"></i>-->
+<!--                            </div>-->
+<!--                            <p>￥2.00</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
     </section>
