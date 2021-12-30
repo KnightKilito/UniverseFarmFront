@@ -151,7 +151,7 @@
                '<div class="product-card__image">'+
                '<img src="static/picture/'+mydata[i].soilPhoto+'">'+
                '<div class="product-card__image-content">'+
-               '<a href="product-details.html"><i class="organik-icon-visibility"></i></a>'+
+               '<a href="#" onclick="seeGoodDetail('+mydata[i].soilId+')"><i class="organik-icon-visibility"></i></a>'+
                '<a onclick="add('+mydata[i].soilId+')"><i class="organik-icon-shopping-cart"></i></a>'+
                '</div>'+
                '</div>'+
@@ -161,11 +161,12 @@
                '<p>$'+mydata[i].soilPrice+'1.00</p>'+
                '</div>'+
                '<div class="product-card__right">'+
-               '<i class="fa fa-star"></i>'+
-               '<i class="fa fa-star"></i>'+
-               '<i class="fa fa-star"></i>'+
-               '<i class="fa fa-star"></i>'+
-               '<i class="fa fa-star"></i>'+
+               // '<i class="fa fa-star"></i>'+
+               // '<i class="fa fa-star"></i>'+
+               // '<i class="fa fa-star"></i>'+
+               // '<i class="fa fa-star"></i>'+
+               // '<i class="fa fa-star"></i>'+
+               usermsg[i].userName+
                '</div>'+
                '</div>'+
                '</div>'+
@@ -215,6 +216,18 @@
 
         }
 
+    </script>
+    <script>
+        function seeGoodDetail(goodId){
+            /*var name = document.getElementById("userName");
+            var pass = document.getElementById("passwords");*/
+            /*setCookie('userName',name.value,7)*/
+            //setCookie('goodId',goodId.value,0);
+            location.href = 'product-details.html';
+            //设置localStorage，只能同域名同端口传值
+            window.localStorage.setItem('goodId',goodId);
+
+        }
     </script>
 </head>
 <body>
