@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -149,7 +149,7 @@
        str=str+ '<div class="col-md-6 col-lg-4">'+
                '<div class="product-card">'+
                '<div class="product-card__image">'+
-               '<img src="static/picture/'+mydata[i].soilPhoto+'">'+
+               '<img src="http://localhost:8088/UniverseFarmBack/static/picture/goods'+mydata[i].soilPhoto+'">'+
                '<div class="product-card__image-content">'+
                '<a href="#" onclick="seeGoodDetail('+mydata[i].soilId+')"><i class="organik-icon-visibility"></i></a>'+
                '<a onclick="add('+mydata[i].soilId+')"><i class="organik-icon-shopping-cart"></i></a>'+
@@ -226,6 +226,14 @@
             location.href = 'product-details.html';
             //设置localStorage，只能同域名同端口传值
             window.localStorage.setItem('goodId',goodId);
+
+        }
+    </script>
+<!--    模拟查询-->
+    <script>
+        function mysearch()
+        {
+            var msg=$("#msg").val();
 
         }
     </script>
@@ -369,8 +377,8 @@
                     <div class="product-sidebar">
                         <div class="product-sidebar__single product-sidebar__search-widget">
                             <form action="#">
-                                <input type="text" placeholder="Search">
-                                <button class="organik-icon-magnifying-glass" type="submit"></button>
+                                <input type="text" placeholder="Search" id="msg">
+                                <button onclick="mysearch()" class="organik-icon-magnifying-glass" type="submit"></button>
                             </form>
                         </div>
                         <div class="product-sidebar__single">
@@ -729,7 +737,7 @@
                         <!-- </div>-->
                     </div>
                     <div class="text-center">
-                        <a href="javascript:mypage('+(globalpage+1)+','+globalsize+')"
+                        <a href="javascript:mypage((globalpage+1),globalsize)"
                            class="thm-btn products__load-more">Load More</a>
                     </div>
                 </div>
