@@ -125,9 +125,9 @@
                         // 读取并且设置农场作物成熟度
                         var input = document.getElementById("addGoodMaturity");
                         input.setAttribute("value", result.data.soilMaturity);
-                        // 读取并设置农场作物类型
+                        /*// 读取并设置农场作物类型
                         input = document.getElementById("addGoodFruit");
-                        input.setAttribute("value", result.data.soilFruit);
+                        input.setAttribute("value", result.data.soilFruit);*/
 
                         $("#good_foot").html("<button className='btn btn-default' data-dismiss='modal'>关闭</button>"
                             + "<button className='btn btn-primary' onClick='harvest(" + soilId + ")'>收获</button>");
@@ -519,7 +519,7 @@
                 </p>
                 <p id="good_fruit">
                     商品类型：<input type="email" name="EMAIL" id="addGoodFruit" value=""
-                                placeholder="good_fruit" disabled="true">
+                                placeholder="good_fruit" >
                 </p>
             </div>
             <div class="modal-footer" id="good_foot">
