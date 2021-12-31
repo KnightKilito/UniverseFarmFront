@@ -40,20 +40,36 @@
     </script>
     <script>
         var soilId=window.localStorage.getItem('soilId');
-        var account=$("#user_account").val();
-        var pwd=$("#user_pwd").val();
+        var accountname=$("#user_account").val();
+        var password=$("#user_pwd").val();
         function mywithdraw() {
+            var soilId=window.localStorage.getItem('soilId');
+            var accountname=$("#user_account").val();
+            var password=$("#user_pwd").val();
             $.ajax({
                 url: "http://localhost:8088/UniverseFarmBack/send.do",
                 dataType: "json",
-                data:{account:account,pwd:pwd,soilId:soilId},
+                data:{account:accountname,pwd:password,soilid:soilId},
                 type: "get",
                 xhrFields: {
                     withCredentials: true
                 },
                 crossDomain: true,
                 success: function (result) {
-                    alert(result.msg);
+                    if(result.flag==0)
+                    {
+                        alert(result.msg);
+                        location.replace("login.html");
+                    }
+                    else if(result.flag==1)
+                    {
+                        alert(result.msg);
+                        location.replace("index.html");
+                    }
+                    else if(result.flag==2)
+                    {
+                        alert(result.msg);
+                    }
                 }
             });
 
