@@ -1,20 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="UTF-8">
-    <title>UniverseFarm 充值</title>
+    <title>UniverseFarm 提现</title>
     <script src="https://cdn.suoluomei.com/common/js/jquery-2.1.4.min.js"></script>
     <script src="https://cdn.suoluomei.com/common/js2.0/vue/v2.5.16/vue.js"></script>
-    <script src="js/hit.js" type="text/javascript"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <script>
         function recharge(){
             var userAccount=$("#user_account").val();
             var userPhone=$("#user_phone").val();
             $.ajax({
-                url: "http://localhost:8088/UniverseFarmBack/checkRechargeUser.do",
+                url: "http://localhost:8088/UniverseFarmBack/sendTome",
                 dataType: "json",
                 type: "get",
                 data: {
@@ -38,6 +36,28 @@
                 }
 
             });
+        }
+    </script>
+    <script>
+        var soilId=window.localStorage.getItem('soilId');
+        var account=$("#user_account").val();
+        var pwd=$("#user_pwd").val();
+        function mywithdraw() {
+            $.ajax({
+                url: "http://localhost:8088/UniverseFarmBack/send.do",
+                dataType: "json",
+                data:{account:account,pwd:pwd,soilId:soilId},
+                type: "get",
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success: function (result) {
+                    alert(result.msg);
+                }
+            });
+
+
         }
     </script>
 </head>
@@ -207,7 +227,7 @@
 <body>
 <div id="Vue">
     <div class="top">
-        <p>UniverseFarm 充值</p>
+        <p>UniverseFarm 提现</p>
     </div>
     <div class="back">
         <div class="information">
@@ -217,31 +237,16 @@
 
 
             <span>电话：</span>
-            <input type="number" placeholder="请输入您的号码" id="user_phone" v-model="phone"
-                   onkeyup="this.value=this.value.replace(/\D/g,'')"
-                   oninput="if(value.length>11)value=value.substring(0,11)">
+            <input type="text" placeholder="请输入您的号码" id="user_phone" v-model="phone">
             <!--<span>密码：</span>
             <input type="number" placeholder="请输入密码" v-model="card"
                    onkeyup="this.value=this.value.replace(/\D/g,'')">-->
-        </div>
-        <div class="choice">
-            <p>请输入充值的金额</p>
+            <span>密码：</span>
+            <input type="password" placeholder="请输入您的密码" id="user_pwd" v-model="pwd">
         </div>
         <div class="recharge_hurg">
             <ul>
-                <!--<li :class="[index == status ? 'bechoice':'']" v-for="(item,index) in list" :key="index"
-                    @click="choicePrice(index,item.price)">{{item.price}}元</li>-->
-                <li>
-                    <input id="otheramount" type="number" placeholder="自定义金额" @click="choiceother" v-model="question"
-                           onkeyup="this.value=this.value.replace(/\D/g,'')"
-                           oninput="  if(value>999999)value=999999;if(value.length>7)value=value.substring(0,7)">
-                </li>
-                <p class="recharge_hurg_price">
-                    充值金额：
-                    <span>{{thePrice}}.00</span><span style="color: black;">元</span>
-                </p>
-                <div class="recharge_btn" @click="wxpaly">微信充值</div>
-                <div class="recharge_btn" @click="wxpaly">支付宝充值</div>
+                <div type="text" class="recharge_btn" onclick="mywithdraw()">提现</div>
             </ul>
         </div>
     </div>
@@ -318,50 +323,21 @@
             },
             choiceother() {
                 this.status = null
-                //当`question`为空时 
+                //当`question`为空时
                 if (this.question == "") {
                     this.thePrice = 0
                 }
             },
             wxpaly() {
                 // console.log(this.confirm = parseInt(this.thePrice))
-                if (this.name == "" || this.phone == "" ) {
+                if (this.name == "" || this.phone == "" || this.card == "") {
                     alert("请填写空余信息")
                 } else {
-                    console.log(this.name);
-                    console.log(this.phone);
-                    console.log(this.card);
-                    console.log(this.confirm = parseInt(this.thePrice));
-                    alert("姓名：" + this.name + "\n" + "手机号码：" + this.phone + "\n"
-                        + "你要充值的金额为：" + this.confirm+"元\n"
-                        +"即虚拟货币："+this.confirm*13+"元");
-
-                    $.ajax({
-                        url: "http://localhost:8088/UniverseFarmBack/checkRechargeUser.do",
-                        dataType: "json",
-                        type: "get",
-                        data: {
-                            userAccount: this.name,
-                            userPhone: this.phone,
-                            recharges:this.confirm
-
-                        },
-                        xhrFields: {                               //保存session在跨域访问中不会丢失！！！
-                            withCredentials: true
-                        },
-                        async: true,
-                        crossDomain: true,
-                        success: function (result) {
-                            if (result.flag == 0) {
-                                //对应不上
-                                alert(result.msg);
-                            } else {
-                                //对应上
-                                alert(result.msg);
-                            }
-                        }
-
-                    });
+                    console.log(this.name)
+                    console.log(this.phone)
+                    console.log(this.card)
+                    console.log(this.confirm = parseInt(this.thePrice))
+                    alert("姓名：" + this.name + "\n" + "手机号码：" + this.phone + "\n" + "卡号：" + this.card + "\n" + "你要充值的金额为：" + this.confirm)
                 }
 
 

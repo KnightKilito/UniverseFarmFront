@@ -41,7 +41,7 @@
                     if (result.flag == 1) {
                         //说明已经登录
                         $("#logininfo").html("欢迎你，" + result.data.userName + "&nbsp;&nbsp;&nbsp;&nbsp;<a href='#' onclick='loginout()'>注销</a>");
-                       $("#userinfo").html("<ul class=\"main-menu__list\"><li class=\"dropdown\"><a href='userinfo.html'><i className='organik-icon-user'></i>个人中心</a> " +
+                       $("#userinfo").html("<ul class=\"main-menu__list\"><li class=\"dropdown\"><a href='index.html'><i className='organik-icon-user'></i>个人中心</a> " +
                            "<ul>\n" +
                            "<li>\n" +
                            "<a href=\"userinfo.html\#change\">个人信息修改</a></li>\n" +
@@ -87,7 +87,7 @@
                                 '<div class="product-card__two-image">' +
                                 ' <span class="product-card__two-sale">sale</span>' +
                                 '<input id="myuserID" type="hidden" value="' + mydata[i].soilID + '" />' +
-                                '<img src="http://localhost:8088/UniverseFarmBack/static/picture/soils/' + mydata[i].soilPhoto + '" alt="">' +
+                                '<img src="http://localhost:8088/UniverseFarmBack/static/picture/goods/' + mydata[i].soilPhoto + '" alt="">' +
                                 '<div class="product-card__two-image-content">' +
                                 // '<a href="#"><i class="organik-icon-visibility"></i></a>' +
                                 '<a href="product-details.html"><i class="organik-icon-visibility"></i></a>' +
@@ -192,7 +192,7 @@
                                 '<div class="product-card__two-image">' +
                                 ' <span class="product-card__two-sale">sale</span>' +
                                 '<input id="myuserID" type="hidden" value="' + mydata[i].soilID + '" />' +
-                                '<img src="http://localhost:8088/UniverseFarmBack/static/picture/goods/' + mydata[i].soilPhoto + '" alt="">' +
+                                '<img src="http://localhost:8088/UniverseFarmBack/static/picture/soils/' + mydata[i].soilPhoto + '" alt="">' +
                                 '<div class="product-card__two-image-content">' +
                                 // '<a href="#"><i class="organik-icon-visibility"></i></a>' +
                                 '<a href="product-details.html"><i class="organik-icon-visibility"></i></a>' +
@@ -1401,7 +1401,6 @@
                     <a href="#" class="fab fa-facebook-square"></a>
                     <a href="#" class="fab fa-instagram"></a>
                 </div>
-
 
             </div>
         </div>
