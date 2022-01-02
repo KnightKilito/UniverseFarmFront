@@ -172,6 +172,11 @@
     function deletecookie() {
         delCookie('userName',' ',-1)
     }
+    function mysend(soilId)
+    {
+        location.href='withdraw.html';
+        window.localStorageName.setItem(soilId);
+    }
 </script>
 <!-- 把东西寄给自己-->
 <script>
@@ -300,10 +305,13 @@
                     $("#userphoto").html("<img src='http://localhost:8088/UniverseFarmBack/static/picture/avatar/" + result.data.userPhoto + "' alt=''/>");
                     //http://localhost:8088/UniverseFarmBack/static/picture/avatar/1640652355689_1640652355651.jpg
                     $("#updateuserphoto").html("<img src='http://localhost:8088/UniverseFarmBack/static/picture/avatar/" + result.data.userPhoto + "' alt=''/>");
+
+                    location.reload();
                 }
             },
             error: function (result) {
                 console.log("error");
+                location.reload();
             }
         });
     }

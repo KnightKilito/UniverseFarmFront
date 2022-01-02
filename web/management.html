@@ -61,7 +61,7 @@
         });
         $(document).ready(function () {
             $.ajax({
-                url: "http://localhost:8088/UniverseFarmBack/getSixSoil.do",
+                url: "http://localhost:8088/UniverseFarmBack/getOrder.do",
                 dataType: "json",
                 type: "get",
                 xhrFields: {
@@ -74,88 +74,50 @@
                     // globalpageCount=result.data.pageCount;
                     if (result.flag == 0) {
                         //没有数据
-                        $("#soillist").html("暂无数据");
-                    } else {
+                        alert(result.msg);
+                        location.replace("login.html");
+                        $("#list").html("暂无数据");
+                    }else if(result.flag==2)
+                    {
+                        alert(result.msg);
+                        location.replace("index.html");
+                    }
+                    else {
                         //取出数据
                         var mydata = result.data;
-                        var myuser = result.usermsg;
+                        // var myuser = result.usermsg;
                         var i;
                         for (i = 0; i < mydata.length; i++) {
                             var str = "";
-                            str = str + '<div class="col-lg-4 col-md-6 filter-item fruits" xmlns="http://www.w3.org/1999/html">' +
+                            str = str + '<div class="col-lg-4 col-md-6 filter-item pantry" xmlns="http://www.w3.org/1999/html">' +
                                 '<div class="product-card__two">' +
                                 '<div class="product-card__two-image">' +
                                 ' <span class="product-card__two-sale">sale</span>' +
-                                '<input id="myuserID" type="hidden" value="' + mydata[i].soilID + '" />' +
-                                '<img src="http://localhost:8088/UniverseFarmBack/static/picture/goods/' + mydata[i].soilPhoto + '" alt="">' +
+                                // '<input id="myuserID" type="hidden" value="' + mydata[i].soilID + '" />' +
+                                '<img src="http://localhost:8088/UniverseFarmBack/static/picture/soils/LiMan.png" alt="">' +
                                 '<div class="product-card__two-image-content">' +
                                 // '<a href="#"><i class="organik-icon-visibility"></i></a>' +
-                                '<a href="product-details.html"><i class="organik-icon-visibility"></i></a>' +
-                                '<a onclick="add(' + mydata[i].soilId + ')"> <i class="organik-icon-shopping-cart"></i></a>' +
+                                '<a onclick="changeOrderStatus('+mydata[i].orderId+')"><i class="organik-icon-visibility"></i></a>' +
+                                // '<a onclick="add(' + mydata[i].soilId + ')"> <i class="organik-icon-shopping-cart"></i></a>' +
                                 '</div>' +
                                 '</div>' +
                                 '<div class="product-card__two-content">' +
-                                '<h3><a href="product-details.html">' + mydata[i].soilName + '</a></h3>' +
+                                '<h3><a href="product-details.html">' + mydata[i].orderName + '</a></h3>' +
                                 '<div class="product-card__two-stars">' +
                                 // '<i class="fa fa-star"></i>' +
                                 // '<i class="fa fa-star"></i>' +
                                 // '<i class="fa fa-star"></i>' +
                                 // '<i class="fa fa-star"></i>' +
                                 // '<i class="fa fa-star"></i>' +
-                                myuser[i].userName+
+                                mydata[i].userId+
                                 '</div>' +
-                                '<p>￥' + mydata[i].soilPrice + '</p>' +
+                                '<p>订单状态' + mydata[i].orderStatus + '</p>' +
                                 '</div>' +
                                 '</div>' +
                                 '</div>';
-                            $("#soillist").append(str);
-                            // str=str+'<li class="gl-item"> <em class="icon_special tejia"></em> <div class="Borders">'+
-                            //         '<div class="img"><a href="goodsinfo.html?goods_id='+mydata[i].goods_id+'"><img src="products/p_1.jpg" style="width:220px;height:220px">'+
-                            //         '</a></div> <div class="Price"><b>¥'+mydata[i].goods_price+'</b>';
-
-                            // if(mydata[i].goods_type=="生鲜")	{
-                            //  str=str+'<span>[¥'+mydata[i].goods_price+'/500g]</span>';
-                            // }else{
-                            //  str=str+'<span>[¥'+mydata[i].goods_price+'/件]</span>';
-                            // }
-                            // str=str+'</div><div class="name"><a href="goodsinfo.html?goods_id='+mydata[i].goods_id+'">'+mydata[i].goods_name+'</a></div>'+
-                            //         '<div class="Shop_name"><a href="#">'+mydata[i].goods_company+'</a></div>'+
-                            //         ' <div class="p-operate"> <a href="#" class="p-o-btn Collect"><em></em>收藏</a>'+
-                            //         '<a href="#" class="p-o-btn shop_cart"><em></em>联系我们</a> </div> </div> </li>';
+                            $("#list").append(str);
                         }
 
-
-                        // var str2='<a href="javascript:mypage(1,'+globalsize+')">首页</a>';
-                        // var str3= '<a href="javascript:mypage('+(globalpage-1)+','+globalsize+')">&lt;上一页</a>';
-                        // var strpage="";
-                        // for(i=1;i<=globalpageCount;i++){
-                        //  if(i==globalpage){
-                        //   strpage=strpage+'<a href="javascript:mypage('+i+','+globalsize+')" class="on">'+i+'</a>';
-                        //  }else{
-                        //   strpage=strpage+'<a href="javascript:mypage('+i+','+globalsize+')" >'+i+'</a>';
-                        //  }
-                        //
-                        // }
-
-//						  <a href="#" class="on">1</a>
-//						  <a href="#">2</a>
-//						  <a href="#">3</a>
-//						  <a href="#">4</a>
-//       var str4='<a href="javascript:mypage('+(globalpage+1)+','+globalsize+')">下一页&gt;</a>';
-//       var str5='<a href="javascript:mypage('+globalpageCount+','+globalsize+')">尾页</a>';
-//
-//       $("#mypagetool").html(str2+str3+strpage+str4+str5);
-//
-//
-//       var selectstr="";
-//       for(i=1;i<=globalpageCount;i++){
-//        if(i==globalpage){
-//         selectstr=selectstr+"<option selected='selected' value='"+i+"'>"+i+"</option>"
-//        }else{
-//         selectstr=selectstr+"<option value='"+i+"'>"+i+"</option>"
-//        }
-//       }
-//       $("#myselect").html(selectstr);
                     }
 
 
@@ -163,10 +125,71 @@
 
             });
 
-        });
+        })
+
+        function changeUserStatus(userId){
+            $.ajax({
+                url: "http://localhost:8088/UniverseFarmBack/changeUserStatus.do",
+                dataType: "json",
+                type: "get",
+                data:{
+                  userId:userId
+                },
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success: function (result) {
+
+                    if (result.flag == 0) {
+                        //更新失败
+                        alert(result.msg);
+                        location.reload();
+                    } else {
+                        alert(result.msg);
+                        location.reload();
+
+                    }
+
+
+                },
+
+            });
+        }
+        function changeOrderStatus(orderId){
+            $.ajax({
+                url: "http://localhost:8088/UniverseFarmBack/changeOrderStatus.do",
+                dataType: "json",
+                type: "get",
+                data:{
+                    orderId:orderId
+                },
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success: function (result) {
+
+                    if (result.flag == 0) {
+                        //更新失败
+                        alert(result.msg);
+                        location.reload();
+                    } else {
+                        alert(result.msg);
+                        location.reload();
+
+                    }
+
+
+                },
+
+            });
+        }
+    </script>
+    <script>
         $(document).ready(function () {
             $.ajax({
-                url: "http://localhost:8088/UniverseFarmBack/getSoils.do",
+                url: "http://localhost:8088/UniverseFarmBack/getUser.do",
                 dataType: "json",
                 type: "get",
                 xhrFields: {
@@ -179,75 +202,49 @@
                     // globalpageCount=result.data.pageCount;
                     if (result.flag == 0) {
                         //没有数据
-                        $("#soillist").html("暂无数据");
-                    } else {
+                        alert(result.msg);
+                        location.replace("login.html");
+                        $("#list").html("暂无数据");
+                    }else if(result.flag==2)
+                    {
+                        alert(result.msg);
+                        location.replace("index.html");
+                    }
+                    else {
                         //取出数据
                         var mydata = result.data;
-                        var myuser = result.usermsg;
+                        // var myuser = result.usermsg;
                         var i;
                         for (i = 0; i < mydata.length; i++) {
                             var str = "";
                             str = str + '<div class="col-lg-4 col-md-6 filter-item dairy" xmlns="http://www.w3.org/1999/html">' +
                                 '<div class="product-card__two">' +
                                 '<div class="product-card__two-image">' +
-                                ' <span class="product-card__two-sale">sale</span>' +
-                                '<input id="myuserID" type="hidden" value="' + mydata[i].soilID + '" />' +
-                                '<img src="http://localhost:8088/UniverseFarmBack/static/picture/soils/' + mydata[i].soilPhoto + '" alt="">' +
+                                ' <span class="product-card__two-sale">safe</span>' +
+                                // '<input id="myuserID" type="hidden" value="' + mydata[i].soilID + '" />' +
+                                '<img src="http://localhost:8088/UniverseFarmBack/static/picture/avatar/'+mydata[i].userPhoto+'" alt="">' +
                                 '<div class="product-card__two-image-content">' +
                                 // '<a href="#"><i class="organik-icon-visibility"></i></a>' +
-                                '<a href="product-details.html"><i class="organik-icon-visibility"></i></a>' +
-                                '<a onclick="add(' + mydata[i].soilId + ')"> <i class="organik-icon-shopping-cart"></i></a>' +
+                                //'<a href="product-details.html"><i class="organik-icon-visibility"></i></a>' +
+                                '<a onclick="changeUserStatus(' + mydata[i].userId + ')"> <i class="organik-icon-visibility"></i></a>' +
                                 '</div>' +
                                 '</div>' +
                                 '<div class="product-card__two-content">' +
-                                '<h3><a href="product-details.html">' + mydata[i].soilName + '</a></h3>' +
+                                '<h3><a href="product-details.html">' + mydata[i].userAccount + '</a></h3>' +
                                 '<div class="product-card__two-stars">' +
                                 // '<i class="fa fa-star"></i>' +
                                 // '<i class="fa fa-star"></i>' +
                                 // '<i class="fa fa-star"></i>' +
                                 // '<i class="fa fa-star"></i>' +
                                 // '<i class="fa fa-star"></i>' +
-                                myuser[i].userName+
+                                mydata[i].userName+
                                 '</div>' +
-                                '<p>￥' + mydata[i].soilPrice + '</p>' +
+                                '<p>用户状态：' + mydata[i].userStatus + '</p>' +
                                 '</div>' +
                                 '</div>' +
                                 '</div>';
-                            $("#soillist").append(str);
+                            $("#list").append(str);
                         }
-
-
-                        // var str2='<a href="javascript:mypage(1,'+globalsize+')">首页</a>';
-                        // var str3= '<a href="javascript:mypage('+(globalpage-1)+','+globalsize+')">&lt;上一页</a>';
-                        // var strpage="";
-                        // for(i=1;i<=globalpageCount;i++){
-                        //  if(i==globalpage){
-                        //   strpage=strpage+'<a href="javascript:mypage('+i+','+globalsize+')" class="on">'+i+'</a>';
-                        //  }else{
-                        //   strpage=strpage+'<a href="javascript:mypage('+i+','+globalsize+')" >'+i+'</a>';
-                        //  }
-                        //
-                        // }
-
-//						  <a href="#" class="on">1</a>
-//						  <a href="#">2</a>
-//						  <a href="#">3</a>
-//						  <a href="#">4</a>
-//       var str4='<a href="javascript:mypage('+(globalpage+1)+','+globalsize+')">下一页&gt;</a>';
-//       var str5='<a href="javascript:mypage('+globalpageCount+','+globalsize+')">尾页</a>';
-//
-//       $("#mypagetool").html(str2+str3+strpage+str4+str5);
-//
-//
-//       var selectstr="";
-//       for(i=1;i<=globalpageCount;i++){
-//        if(i==globalpage){
-//         selectstr=selectstr+"<option selected='selected' value='"+i+"'>"+i+"</option>"
-//        }else{
-//         selectstr=selectstr+"<option value='"+i+"'>"+i+"</option>"
-//        }
-//       }
-//       $("#myselect").html(selectstr);
                     }
 
 
@@ -544,7 +541,7 @@
                 <div class="block-title ">
                     <div class="block-title__decor"></div>
                     <p>Recently Added</p>
-                    <h3>New Products</h3>
+                    <h3>Manager</h3>
                 </div>
                 <ul class="post-filter filters list-unstyled">
                     <li class="active filter" data-filter=".filter-item">全部</li>
@@ -553,7 +550,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="row filter-layout" id="soillist">
+            <div class="row filter-layout" id="list">
                 <!--此处填充信息-->
             </div>
         </div>
