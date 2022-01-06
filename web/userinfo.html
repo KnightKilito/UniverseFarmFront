@@ -118,7 +118,7 @@
                             '<div class="product-card__two-image-content">' +
                             '<a href="#" onclick="seeGoodDetail(' + mydata[i].soilId + ')"><i class="organik-icon-visibility"></i></a>' +
                             // '<a href="#"><i class="organik-icon-heart"></i></a>' +
-                            '<a href="#" onclick="sendToMe(' + mydata[i].soilId + ')"><i class="organik-icon-shopping-cart"></i></a>' +
+                            '<a href="withdraw.html" onclick="mysend('+mydata[i].soilId+')"><i class="organik-icon-shopping-cart"></i></a>' +
                             '</div>' +
                             '</div>' +
                             '<div class="product-card__two-content">' +
@@ -182,7 +182,7 @@
 <script>
     function sendToMe(goodId) {
         $.ajax({
-            url: "http://localhost:8088/UniverseFarmBack/addCart.do",
+            url: "http://localhost:8088/UniverseFarmBack/sendToMe",
             dataType: "json",
             data: {soilinfoid: goodId},
             type: "get",
