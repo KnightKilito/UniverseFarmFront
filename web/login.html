@@ -48,13 +48,33 @@
             var password=$("#password").val();
             var password2=$("#password2").val();
             var name=$("#name").val();
-            if (password!=password2) alert("两次密码输入不一致，请重新输入");
-            if(accountname=='') alert("用户名不得为空");
-            if(password=='') alert("密码不得为空");
+            var phone=$("#phone").val();
+
+            if(accountname==''){
+                alert("用户名不得为空");
+                return;
+            }
+            if(phone==''){
+                alert("电话不得为空");
+                return;
+            }
+            if(password==''){
+                alert("密码不得为空");
+                return;
+            }
+            if(password!=password2){
+                alert("两次密码输入不一致，请重新输入");
+                return;
+            }
             $.ajax({
                 url: "http://localhost:8088/UniverseFarmBack/register.do",
                 dataType:"json",
-                data:{account:accountname,pwd:password,name:name},
+                data:{
+                    account:accountname,
+                    pwd:password,
+                    name:name,
+                    phone:phone
+                },
                 type:"get",
                 xhrFields: {                               //保存session在跨域访问中不会丢失！！！
                     withCredentials: true
@@ -90,6 +110,7 @@
             <!-- <span>or use your email for registration</span> -->
             <br>
             <input id="name" type="text" placeholder="昵称" />
+            <input id="phone" type="text" placeholder="电话号码" />
             <input id="accountname" type="text" placeholder="用户名" />
             <input id="password" type="password" placeholder="密码" />
             <input id="password2" type="password" placeholder="确认密码" />
